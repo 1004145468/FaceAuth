@@ -2,8 +2,12 @@
     <string name="app_name">图言</string>
     <string name="login_user">请输入用户名</string>
     <string name="login_password">请输入登录密码</string>
+    <string name="regeist_nick">请输入登录昵称</string>
+    <string name="regist_msg">请输入个性签名</string>
+    <string name="regist_email">请输入辅助邮箱</string>
     <string name="login_btnText">登　录</string>
     <string name="login_renemberText">自动登录</string>
     <string name="login_reguser">点我进行注册</string>
     <string name="cameraisnull">未检测到您的手机前置摄像头</string>
+    <string name="regeist">注　册</string>
 </resources>

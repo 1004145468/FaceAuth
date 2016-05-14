@@ -9,14 +9,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
-    private Toolbar toolbar;
     private EditText mUserText,mPsdText;
     private CheckBox mRemenberBox;
-    private TextView mRegUser;
     private View rootView;
 
     @Override
@@ -33,15 +30,20 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         mUserText = (EditText) findViewById(R.id.id_user);
         mPsdText = (EditText) findViewById(R.id.id_password);
         mRemenberBox = (CheckBox) findViewById(R.id.id_remenberInfo);
-        mRegUser = (TextView) findViewById(R.id.id_reguser);
         rootView.setOnTouchListener(this);
     }
 
     private void initToolBar() {
-        toolbar = (Toolbar) findViewById(R.id.id_toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.id_toolbar);
         setSupportActionBar(toolbar);
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.id_toorbarinclude);
         appBarLayout.setExpanded(false);
+    }
+
+    //注册用户
+    public void onRegist(View view){
+        Intent intent = new Intent(this,RegeistActivity.class);
+        startActivity(intent);
     }
 
     //用户登录

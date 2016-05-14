@@ -19,9 +19,14 @@
 
 
     <style name="logineditstyle">
+        <item name="android:textColor">#fff</item>
         <item name="android:layout_marginRight">30dp</item>
         <item name="android:layout_marginLeft">30dp</item>
         <item name="android:singleLine">true</item>
     </style>
 
+    <style name="regeisteditstyle" parent="logineditstyle">
+        <item name="android:layout_marginRight">15dp</item>
+        <item name="android:layout_marginLeft">15dp</item>
+    </style>
 </resources>

@@ -18,7 +18,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FaceLoginActivity"></activity>
+        <activity android:name=".FaceLoginActivity" />
+        <activity android:name=".RegeistActivity" />
+        <activity android:name=".base.BaseActivity"></activity>
     </application>
 
 </manifest>

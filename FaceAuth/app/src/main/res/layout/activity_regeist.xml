@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/regeist_bg"
+    android:orientation="vertical"
+    >
+
+    <include layout="@layout/activity_title" />
+
+    <EditText
+        android:id="@+id/id_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="@string/login_user"
+        android:drawableLeft="@mipmap/user"
+        android:drawablePadding="8dp"
+        android:background="@drawable/edit"
+        style="@style/regeisteditstyle"
+        />
+
+    <EditText
+        android:id="@+id/id_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:hint="@string/login_password"
+        android:drawableLeft="@mipmap/password"
+        android:drawablePadding="8dp"
+        android:background="@drawable/edit"
+        style="@style/regeisteditstyle"
+        />
+
+    <EditText
+    android:id="@+id/id_nickname"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="35dp"
+    android:hint="@string/regeist_nick"
+    android:drawableLeft="@mipmap/nickname"
+    android:drawablePadding="8dp"
+    android:background="@drawable/edit"
+    style="@style/regeisteditstyle"
+    />
+
+    <EditText
+        android:id="@+id/id_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:hint="@string/regist_email"
+        android:drawableLeft="@mipmap/email"
+        android:drawablePadding="8dp"
+        android:background="@drawable/edit"
+        style="@style/regeisteditstyle"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/regeist_btn"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="40dp"
+        android:textColor="@color/hintext"
+        android:textSize="19sp"
+        android:text="@string/regeist"
+        android:onClick="onRegist"/>
+
+</LinearLayout>
