@@ -142,14 +142,14 @@ public class FaceLoginActivity extends AppCompatActivity implements SurfaceHolde
             Toast.makeText(this, R.string.cameraisnull, Toast.LENGTH_SHORT).show();
             return;
         }
-        startShow(mCamera, mHolder);
+        startShow(mCamera, holder);
     }
 
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
         if (mCamera != null) {
             mCamera.stopPreview();
-            startShow(mCamera, mHolder);
+            startShow(mCamera, holder);
         }
 
     }

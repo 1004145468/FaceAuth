@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.xtu.faceauth.App.TYApplication;
+import com.xtu.faceauth.app.TYApplication;
 import com.xtu.faceauth.R;
 
 public class ToastUtils {

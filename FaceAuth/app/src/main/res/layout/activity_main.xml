@@ -21,8 +21,8 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@mipmap/login_head"
-                android:scaleType="matrix"/>
+                android:scaleType="matrix"
+                android:src="@mipmap/login_head" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/id_toolbar"
@@ -36,89 +36,92 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <android.support.v4.widget.NestedScrollView
+
+    <RelativeLayout
         android:id="@+id/id_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fillViewport="true"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        >
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <RelativeLayout
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <EditText
+            android:id="@+id/id_user"
+            style="@style/logineditstyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:background="@drawable/edit"
+            android:drawableLeft="@mipmap/user"
+            android:drawablePadding="8dp"
+            android:hint="@string/login_user" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/ic_launcher"
-                android:layout_marginTop="50dp"
-                android:layout_centerHorizontal="true"
-                />
+        <EditText
+            android:id="@+id/id_password"
+            style="@style/logineditstyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="220dp"
+            android:background="@drawable/edit"
+            android:drawableLeft="@mipmap/password"
+            android:drawablePadding="8dp"
+            android:hint="@string/login_password" />
 
-            <EditText
-                android:id="@+id/id_user"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="150dp"
-                android:hint="@string/login_user"
-                android:drawablePadding="8dp"
-                android:drawableLeft="@mipmap/user"
-                android:background="@drawable/edit"
-                style="@style/logineditstyle"
-                />
+        <CheckBox
+            android:id="@+id/id_remenberInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="290dp"
+            android:text="@string/login_renemberText"
+            android:textColor="#ccc"
+            android:textSize="17sp" />
 
-            <EditText
-                android:id="@+id/id_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="220dp"
-                android:hint="@string/login_password"
-                android:drawableLeft="@mipmap/password"
-                android:drawablePadding="8dp"
-                android:background="@drawable/edit"
-                style="@style/logineditstyle"
-                 />
+        <TextView
+            android:id="@+id/id_forgetpsw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="25dp"
+            android:text="@string/login_forgetpsw"
+            android:clickable="true"
+            android:onClick="onFindPsw"
+            android:textColor="#f55"
+            android:textSize="17sp" />
 
-            <CheckBox
-                android:id="@+id/id_remenberInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_renemberText"
-                android:textColor="#ccc"
-                android:textSize="16sp"
-                android:layout_marginLeft="28dp"
-                android:layout_marginTop="290dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="340dp"
+            android:background="@drawable/login_btn"
+            android:onClick="onLogin"
+            android:text="@string/login_btnText"
+            android:textColor="@color/hintext"
+            android:textSize="19sp" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/login_btn"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_marginTop="340dp"
-                android:textSize="19sp"
-                android:text="@string/login_btnText"
-                android:textColor="@color/hintext"
-                android:onClick="onLogin"/>
+        <TextView
+            android:id="@+id/id_reguser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="20dp"
+            android:clickable="true"
+            android:onClick="onRegist"
+            android:padding="8dp"
+            android:text="@string/login_reguser"
+            android:textColor="#EDCC2B25"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/id_reguser"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_reguser"
-                android:textSize="16sp"
-                android:textColor="#EDCC2B25"
-                android:clickable="true"
-                android:padding="8dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="30dp"
-                android:layout_marginLeft="20dp"
-                android:onClick="onRegist"/>
-
-        </RelativeLayout>
-    </android.support.v4.widget.NestedScrollView>
+    </RelativeLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

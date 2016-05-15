@@ -1,14 +1,26 @@
 package com.xtu.faceauth;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.xtu.faceauth.utils.BmobUtils;
+import com.xtu.faceauth.utils.ProgressbarUtils;
+import com.xtu.faceauth.utils.SpUtils;
+import com.xtu.faceauth.utils.ToastUtils;
+
+import cn.bmob.v3.listener.ResetPasswordByEmailListener;
+import cn.bmob.v3.listener.SaveListener;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
@@ -20,6 +32,13 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //判断用户是否允许自动登录
+        if(SpUtils.getAutoLogin()){
+            //直接跳转登录功能界面
+            //TODO
+            ToastUtils.show("登录成功");
+        }
         initToolBar();
         initViews();
     }
@@ -48,7 +67,73 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     //用户登录
     public void onLogin(View view){
+        String mUserName = mUserText.getText().toString().trim();
+        String mPassword = mPsdText.getText().toString().trim();
+        if(TextUtils.isEmpty(mUserName)||TextUtils.isEmpty(mPassword)){
+            ToastUtils.show("请将登录信息填写完整！");
+            return;
+        }
 
+        ProgressbarUtils.showDialog(this,"努力加载用户信息...");
+        //用户登录信息确定填写完整，进行用户登录
+        BmobUtils.startLogin(mUserName, mPassword, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                ProgressbarUtils.hideDialog();
+                //登录成功
+                //TODO
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                ProgressbarUtils.hideDialog();
+                //登录失败
+                ToastUtils.show("用户名或密码错误！");
+            }
+        });
+    }
+
+    private AlertDialog mDialog;
+    private TextView mForgetText;
+    private Button mForgetBtn;
+    //当找回密码
+    public void onFindPsw(View view){
+        //弹出重置密码的对话框
+        if(mDialog==null){
+            mDialog = new AlertDialog.Builder(this).create();
+            View dialogView = View.inflate(this, R.layout.dialog_findpsw, null);
+            mDialog.setView(dialogView,0,0,0,0);
+            mDialog.setCancelable(true);
+            mForgetText = (TextView) dialogView.findViewById(R.id.id_email);
+            mForgetBtn = (Button) dialogView.findViewById(R.id.id_forgetbtn);
+            mForgetBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //得到用户注册时的邮箱地址
+                    String mEmail = mForgetText.getText().toString().trim();
+                    if(TextUtils.isEmpty(mEmail)){
+                        ToastUtils.show("邮箱不能为空，请重新输入！");
+                        return;
+                    }
+                    ProgressbarUtils.showDialog(MainActivity.this,"后台重置用户登录密码，请稍后！");
+                    //检测邮箱不为空之后，通过指定的邮箱进行密码重置
+                    BmobUtils.startFindPassword(mEmail, new ResetPasswordByEmailListener() {
+                        @Override
+                        public void onSuccess() {
+                            ProgressbarUtils.hideDialog();
+                            ToastUtils.show("重置密码的邮件发送成功！");
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            ProgressbarUtils.hideDialog();
+                            ToastUtils.show("网络不给力或者邮箱未激活！");
+                        }
+                    });
+                }
+            });
+        }
+        mDialog.show();
     }
 
 
