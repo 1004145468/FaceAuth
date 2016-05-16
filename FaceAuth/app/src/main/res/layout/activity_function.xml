@@ -1,0 +1,66 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/function_bg"
+    android:orientation="vertical"
+    >
+
+    <FrameLayout
+        android:id="@+id/id_function_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/function_include"
+        android:paddingTop="5dp"
+        android:paddingBottom="3dp">
+
+        <TextView
+            android:id="@+id/function_funcpic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/icon_funcpic"
+            android:text="@string/iconText_funpic"
+            android:tag="0"
+            style="@style/function_icon_style"
+            />
+
+        <TextView
+            android:id="@+id/function_famil"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/icon_famil_no"
+            android:text="@string/iconText_famil"
+            android:tag="1"
+            style="@style/function_icon_style"
+            />
+        <TextView
+            android:id="@+id/function_friends"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/icon_friends_no"
+            android:text="@string/iconText_friends"
+            android:tag="2"
+            style="@style/function_icon_style"
+            />
+        <TextView
+            android:id="@+id/function_owner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/icon_owner_no"
+            android:text="@string/iconText_owner"
+            android:tag="3"
+            style="@style/function_icon_style"/>
+    </LinearLayout>
+
+</LinearLayout>
+

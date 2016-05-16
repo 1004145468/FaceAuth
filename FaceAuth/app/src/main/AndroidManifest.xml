@@ -26,7 +26,8 @@
         </activity>
         <activity android:name=".FaceLoginActivity" />
         <activity android:name=".RegeistActivity" />
-        <activity android:name=".base.BaseActivity"></activity>
+        <activity android:name=".base.BaseActivity" />
+        <activity android:name=".FunctionActivity"></activity>
     </application>
 
 </manifest>

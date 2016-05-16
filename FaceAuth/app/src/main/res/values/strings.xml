@@ -13,4 +13,14 @@
     <string name="regeist">注　册</string>
     <string name="findpsw_title">请输入已经激活的注册邮箱账号</string>
     <string name="findpsw_btn">找回密码</string>
+    <string name="iconText_funpic">趣图</string>
+    <string name="iconText_famil">相似脸</string>
+    <string name="iconText_friends">社区</string>
+    <string name="iconText_owner">我</string>
+    <string name="owner_mworks">我的作品集</string>
+    <string name="owner_safe">账号安全</string>
+    <string name="owner_idea">意见反馈</string>
+    <string name="owner_about">关于图言</string>
+    <string name="owner_share">分享好友</string>
+    <string name="owner_exit">退出登录</string>
 </resources>

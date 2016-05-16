@@ -34,10 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         setContentView(R.layout.activity_main);
 
         //判断用户是否允许自动登录
-        if(SpUtils.getAutoLogin()){
+        if(SpUtils.getAutoLogin()&&BmobUtils.getCurrentUser()!=null){
             //直接跳转登录功能界面
-            //TODO
-            ToastUtils.show("登录成功");
+            enterFunctionActivty();
         }
         initToolBar();
         initViews();
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             public void onSuccess() {
                 ProgressbarUtils.hideDialog();
                 //登录成功
-                //TODO
+                enterFunctionActivty();
             }
 
             @Override
@@ -91,6 +90,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 ToastUtils.show("用户名或密码错误！");
             }
         });
+    }
+
+    private void enterFunctionActivty(){
+        Intent intent = new Intent(MainActivity.this,FunctionActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private AlertDialog mDialog;
