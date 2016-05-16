@@ -5,12 +5,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-   >
+    >
 
     <SurfaceView
         android:id="@+id/id_surfaceview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         />
 
     <ImageView
@@ -20,15 +21,29 @@
         android:scaleType="centerCrop"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+    <EditText
+        android:id="@+id/id_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/login_user"
+        android:drawableLeft="@mipmap/user"
+        android:drawablePadding="8dp"
+        android:background="@drawable/edit"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="90dp"
+        style="@style/regeisteditstyle"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/id_fabbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="20dp"
-        android:layout_marginRight="20dp"
         app:fabSize="normal"
         android:elevation="10dp"
-        android:src="@mipmap/camera_scan"/>
+        android:src="@mipmap/camera_scan"
+        />
 
 </android.support.design.widget.CoordinatorLayout>

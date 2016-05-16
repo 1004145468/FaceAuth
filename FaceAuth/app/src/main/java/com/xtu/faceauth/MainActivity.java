@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+       // Log.e("hehe","hehehe");
         //判断用户是否允许自动登录
         if(SpUtils.getAutoLogin()&&BmobUtils.getCurrentUser()!=null){
             //直接跳转登录功能界面
@@ -143,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
 
     private int startX;
+
     //处理acticvity左划事件
     @Override
     public boolean onTouch(View v, MotionEvent event) {

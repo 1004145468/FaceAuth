@@ -28,4 +28,7 @@ dependencies {
     compile files('libs/okhttp-2.4.0.jar')
     compile files('libs/okio-1.4.0.jar')
     compile files('libs/org.apache.http.legacy.jar')
+    compile files('libs/universal-image-loader-1.9.2_sources.jar')
+    compile files('libs/Msc.jar')
+    compile files('libs/Sunflower.jar')
 }

@@ -9,6 +9,11 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:name=".app.TYApplication"
@@ -24,7 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FaceLoginActivity" />
+        <activity android:name=".FaceLoginActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard"/>
         <activity android:name=".RegeistActivity" />
         <activity android:name=".base.BaseActivity" />
         <activity android:name=".FunctionActivity"></activity>

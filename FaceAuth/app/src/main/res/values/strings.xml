@@ -11,6 +11,7 @@
     <string name="login_reguser">点我进行注册</string>
     <string name="cameraisnull">未检测到您的手机前置摄像头</string>
     <string name="regeist">注　册</string>
+    <string name="vert">验　证</string>
     <string name="findpsw_title">请输入已经激活的注册邮箱账号</string>
     <string name="findpsw_btn">找回密码</string>
     <string name="iconText_funpic">趣图</string>
