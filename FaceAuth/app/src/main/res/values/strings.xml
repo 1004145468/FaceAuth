@@ -23,5 +23,13 @@
     <string name="owner_idea">意见反馈</string>
     <string name="owner_about">关于图言</string>
     <string name="owner_share">分享好友</string>
+    <string name="face_reg_title">人脸识别</string>
+    <string name="face_reg_note">开启人脸识别后，可进行人脸登录。</string>
+    <string name="face_reg_pic">照片</string>
+    <string name="face_reg_btn">使　用</string>
+
+
     <string name="owner_exit">退出登录</string>
+
+
 </resources>

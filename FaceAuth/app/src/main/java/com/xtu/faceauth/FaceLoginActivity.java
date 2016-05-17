@@ -254,7 +254,7 @@ public class FaceLoginActivity extends AppCompatActivity implements SurfaceHolde
     private void startShow(Camera camera, SurfaceHolder holder) {
         try {
             camera.setPreviewDisplay(holder);
-            camera.setDisplayOrientation(90);
+            //camera.setDisplayOrientation(90);  //拍摄完成后将拍摄画面旋转90度
             camera.startPreview();
         } catch (IOException e) {
             e.printStackTrace();

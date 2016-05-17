@@ -2,23 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#4689f9"
+    android:background="#005db9"
     android:orientation="horizontal"
-    android:padding="5dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
     >
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
         android:clickable="true"
         android:onClick="onBack"
-        android:padding="5dp"
+        android:padding="10dp"
         android:src="@mipmap/ic_menu_back"/>
 
     <View
-        android:layout_width="2dp"
+        android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="#8888"/>
+        android:background="#aaa"/>
 
     <TextView
         android:id="@+id/id_activity_title"

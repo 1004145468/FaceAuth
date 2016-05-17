@@ -1,5 +1,6 @@
 package com.xtu.faceauth.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.xtu.faceauth.FaceRegActivity;
 import com.xtu.faceauth.R;
 import com.xtu.faceauth.bean.TYUser;
 import com.xtu.faceauth.utils.BmobUtils;
@@ -79,6 +81,7 @@ public class OwnerFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()) {
             case R.id.id_info:
 
@@ -87,7 +90,7 @@ public class OwnerFragment extends Fragment implements View.OnClickListener {
 
                 break;
             case R.id.id_safe:
-
+                intent.setClass(getActivity(),FaceRegActivity.class);
                 break;
             case R.id.id_idea:
 
@@ -102,5 +105,6 @@ public class OwnerFragment extends Fragment implements View.OnClickListener {
 
                 break;
         }
+        getActivity().startActivity(intent);
     }
 }

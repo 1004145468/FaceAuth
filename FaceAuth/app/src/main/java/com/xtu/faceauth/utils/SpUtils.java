@@ -12,6 +12,7 @@ import com.xtu.faceauth.config.Constants;
 public class SpUtils {
 
     private static final String AUTOLOGIN = "autologin";
+    private static final String FACELOGIN = "facelogin";
     private static SharedPreferences mSP = TYApplication.getContext().getSharedPreferences(Constants.SpName, Context.MODE_PRIVATE);
 
     //保存配置是否自定登录的参数
@@ -25,4 +26,17 @@ public class SpUtils {
     public static boolean getAutoLogin(){
         return mSP.getBoolean(AUTOLOGIN,false);
     }
+
+    //保存配置是否进行人脸识别
+    public static void setFaceLogin(Boolean value){
+        SharedPreferences.Editor edit = mSP.edit();
+        edit.putBoolean(FACELOGIN,value);
+        edit.commit();
+    }
+
+    //获取当前是否为允许人脸识别
+    public static boolean getFaceLogin(){
+        return mSP.getBoolean(FACELOGIN,false);
+    }
+
 }

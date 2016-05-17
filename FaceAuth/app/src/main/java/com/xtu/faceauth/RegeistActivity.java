@@ -22,6 +22,7 @@ public class RegeistActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setWinFull();
         setContentView(R.layout.activity_regeist);
         initViews();
     }

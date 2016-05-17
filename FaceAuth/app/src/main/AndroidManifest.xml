@@ -29,11 +29,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".FaceLoginActivity"
-            android:configChanges="keyboardHidden|orientation|keyboard"/>
+        <activity
+            android:name=".FaceLoginActivity"
+            android:configChanges="keyboardHidden|orientation|keyboard" />
         <activity android:name=".RegeistActivity" />
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".FunctionActivity"></activity>
+        <activity android:name=".FunctionActivity" />
+        <activity android:name=".FaceRegActivity"/>
     </application>
 
 </manifest>

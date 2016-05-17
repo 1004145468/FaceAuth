@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private CheckBox mRemenberBox;
     private View rootView;
 
+    private boolean mFaceLogin;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     }
 
     private void initToolBar() {
+
+        mFaceLogin = SpUtils.getFaceLogin();
         Toolbar toolbar = (Toolbar) findViewById(R.id.id_toolbar);
         setSupportActionBar(toolbar);
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.id_toorbarinclude);
@@ -154,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 break;
             case MotionEvent.ACTION_UP:
                 int tmpX = (int) event.getX();
-                if(startX-tmpX>100){
+                if(startX-tmpX>100&&mFaceLogin){
                     //达到侧滑阈值
                     Intent intent= new Intent(this,FaceLoginActivity.class);
                     startActivity(intent);
