@@ -3,6 +3,7 @@ package com.xtu.faceauth.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.iflytek.cloud.SpeechUtility;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.WeakMemoryCache;
@@ -26,6 +27,7 @@ public class TYApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
+        SpeechUtility.createUtility(this, "appid=" + Constants.MSKey);
         Bmob.initialize(this, Constants.BmobKey);
         //初始化图片加载框架
         initImagloader(this);

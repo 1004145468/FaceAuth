@@ -3,6 +3,7 @@ package com.xtu.faceauth;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -75,11 +76,19 @@ public class FaceRegActivity extends BaseActivity implements View.OnClickListene
 
         //初始化显示
         turnShow(isOpen);
+
+        //判断是否已经人脸注册了
+        String facePath = (String) BmobUtils.getThingOfUser("facePath");
+        if (!TextUtils.isEmpty(facePath)) {
+            ImageUtils.Display(facePath, mHeadView);
+            mRegBtn.setText("已经被注册！");
+            mRegBtn.setEnabled(false);
+        }
     }
 
     //点击使用按钮 触发注册按钮
     private void onRegist() {
-        if(mDatas==null){
+        if (mDatas == null) {
             ToastUtils.show("请选择需要注册的人脸！");
             return;
         }
@@ -93,6 +102,7 @@ public class FaceRegActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void onSuccess() {
+                ToastUtils.show("文件上传成功！！");
                 TYUser currentUser = BmobUtils.getCurrentUser();
                 currentUser.setFacePath(NetFileUtils.getNetFilePath());
                 BmobUtils.upDateUser(currentUser, new UpdateListener() {
@@ -105,7 +115,9 @@ public class FaceRegActivity extends BaseActivity implements View.OnClickListene
                     @Override
                     public void onSuccess() {
                         //开始人脸模型的注册
+                        ToastUtils.show("文件更新成功！！");
                         if (mDatas != null) {
+                            ToastUtils.show("真正开始人脸注册！！！");
                             FaceRequest mFaceRequest = new FaceRequest(FaceRegActivity.this);
                             mFaceRequest.setParameter(SpeechConstant.AUTH_ID, (String) BmobUtils.getThingOfUser("username"));
                             mFaceRequest.setParameter(SpeechConstant.WFR_SST, "reg");
@@ -222,11 +234,11 @@ public class FaceRegActivity extends BaseActivity implements View.OnClickListene
         }
     };
 
-    private void startRegister(JSONObject obj) throws JSONException{
+    private void startRegister(JSONObject obj) throws JSONException {
         int ret = obj.getInt("ret");
-        if (ret == 0&&"success".equals(obj.get("rst"))) {
+        if (ret == 0 && "success".equals(obj.get("rst"))) {
             ToastUtils.show("注册成功");
-        }else {
+        } else {
             ToastUtils.show("注册失败，请重新注册！");
         }
     }

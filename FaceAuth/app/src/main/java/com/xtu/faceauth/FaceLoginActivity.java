@@ -1,5 +1,6 @@
 package com.xtu.faceauth;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.hardware.Camera;
@@ -21,9 +22,9 @@ import com.iflytek.cloud.FaceRequest;
 import com.iflytek.cloud.RequestListener;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
-import com.iflytek.cloud.SpeechUtility;
 import com.xtu.faceauth.config.Constants;
 import com.xtu.faceauth.utils.FaceUtils;
+import com.xtu.faceauth.utils.ImageUtils;
 import com.xtu.faceauth.utils.ProgressbarUtils;
 import com.xtu.faceauth.utils.ToastUtils;
 
@@ -48,7 +49,6 @@ public class FaceLoginActivity extends AppCompatActivity implements SurfaceHolde
     private Camera.PictureCallback mPictureCallBack = new Camera.PictureCallback() {
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
-            ToastUtils.show("照片存储");
             //设置不可被点击仅需拍照
             mFaBtn.setClickable(false);
             FileOutputStream fos = null;
@@ -82,11 +82,12 @@ public class FaceLoginActivity extends AppCompatActivity implements SurfaceHolde
     //开始检测
     private void handleFace() {
         ProgressbarUtils.showDialog(this, "图言正在努力的识别，请勿打断！");
-        //  离线人脸检测并裁减到人脸
         //人脸比对
         Bitmap mBitmap = BitmapFactory.decodeFile(Constants.saveFile);
-        Bitmap sBitmap = Bitmap.createBitmap(mBitmap, 0, 0, mBitmap.getWidth(), mBitmap.getHeight() / 2);
-        mBitmap.recycle();
+//        int mAngle = ImageUtils.readPictureDegree(Constants.saveFile);
+        int mAngle = -90;
+        Bitmap dBitmap = ImageUtils.rotateImage(mAngle, mBitmap);
+        Bitmap sBitmap = Bitmap.createBitmap(dBitmap, 0, 0, dBitmap.getWidth(), dBitmap.getHeight() / 2);
         FaceUtils.saveBitmapToFile(sBitmap);
         // 获取图片的宽和高
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -129,7 +130,6 @@ public class FaceLoginActivity extends AppCompatActivity implements SurfaceHolde
             ProgressbarUtils.hideDialog();
             try {
                 String result = new String(buffer, "utf-8");
-                ToastUtils.show("result-->"+result);
                 JSONObject object = new JSONObject(result);
                 startVerify(object);
             } catch (UnsupportedEncodingException e) {
@@ -144,7 +144,7 @@ public class FaceLoginActivity extends AppCompatActivity implements SurfaceHolde
             ProgressbarUtils.hideDialog();
             if (error != null) {
                 startShow(mCamera, mHolder);
-                ToastUtils.show(error.getPlainDescription(true));
+                ToastUtils.show("验证失败，请重新尝试！");
             }
         }
     };
@@ -158,18 +158,23 @@ public class FaceLoginActivity extends AppCompatActivity implements SurfaceHolde
             return;
         }
         if ("success".equals(obj.get("rst")) && obj.getBoolean("verf")) {
-            ToastUtils.show("通过验证，欢迎回来！");
+            enterFunctionActivty();
         } else {
             ToastUtils.show("验证失败");
             startShow(mCamera, mHolder);
         }
     }
 
+    private void enterFunctionActivty(){
+        Intent intent = new Intent();
+        setResult(RESULT_OK,intent);
+        finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_face_login);
-        SpeechUtility.createUtility(this, "appid=" + Constants.MSKey);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         initViews();
     }
@@ -245,7 +250,7 @@ public class FaceLoginActivity extends AppCompatActivity implements SurfaceHolde
     private void startShow(Camera camera, SurfaceHolder holder) {
         try {
             camera.setPreviewDisplay(holder);
-            //camera.setDisplayOrientation(90);  //拍摄完成后将拍摄画面旋转90度
+            camera.setDisplayOrientation(90);  //拍摄完成后将拍摄画面旋转90度
             camera.startPreview();
         } catch (IOException e) {
             e.printStackTrace();

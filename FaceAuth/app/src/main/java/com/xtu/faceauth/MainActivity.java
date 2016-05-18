@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     private boolean mFaceLogin;
 
+    private static int REQUEST_FACELOGIN = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,10 +163,17 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 if(startX-tmpX>100&&mFaceLogin){
                     //达到侧滑阈值
                     Intent intent= new Intent(this,FaceLoginActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent,REQUEST_FACELOGIN);
                 }
                 break;
         }
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+       if(resultCode == RESULT_OK&&requestCode==REQUEST_FACELOGIN){
+           enterFunctionActivty();
+       }
     }
 }
