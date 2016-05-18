@@ -1,9 +1,11 @@
 package com.xtu.faceauth;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
@@ -93,5 +95,19 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
         }
         //提交事务
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("确定要退出此应用？")
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        FunctionActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("算了",null)
+                .show();
     }
 }

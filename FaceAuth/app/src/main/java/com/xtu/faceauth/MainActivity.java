@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -25,10 +26,9 @@ import cn.bmob.v3.listener.SaveListener;
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
 
     private EditText mUserText,mPsdText;
-    private CheckBox mRemenberBox;
-    private View rootView;
 
     private boolean mFaceLogin;
+    private boolean mAutoLogin;
 
     private static int REQUEST_FACELOGIN = 1;
 
@@ -36,10 +36,12 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mAutoLogin = SpUtils.getAutoLogin();
+        mFaceLogin = SpUtils.getFaceLogin();
 
        // Log.e("hehe","hehehe");
-        //判断用户是否允许自动登录
-        if(SpUtils.getAutoLogin()&&BmobUtils.getCurrentUser()!=null){
+        //当前用户不为空，并且允许自动登录
+        if(mAutoLogin && BmobUtils.getCurrentUser()!=null){
             //直接跳转登录功能界面
             enterFunctionActivty();
         }
@@ -49,16 +51,23 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     //初始化所有控件
     private void initViews() {
-        rootView = findViewById(R.id.id_root);
+        View rootView = findViewById(R.id.id_root);
+        rootView.setOnTouchListener(this);
         mUserText = (EditText) findViewById(R.id.id_user);
         mPsdText = (EditText) findViewById(R.id.id_password);
-        mRemenberBox = (CheckBox) findViewById(R.id.id_remenberInfo);
-        rootView.setOnTouchListener(this);
+
+        CheckBox mRemenberBox = (CheckBox) findViewById(R.id.id_remenberInfo);
+        mRemenberBox.setChecked(mAutoLogin);
+        mRemenberBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SpUtils.setAutoLogin(isChecked);
+            }
+        });
     }
 
     private void initToolBar() {
 
-        mFaceLogin = SpUtils.getFaceLogin();
         Toolbar toolbar = (Toolbar) findViewById(R.id.id_toolbar);
         setSupportActionBar(toolbar);
         AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.id_toorbarinclude);

@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/findpsw_bg"
-    android:paddingTop="10dp"
-    android:paddingBottom="10dp"
+    android:paddingTop="15dp"
+    android:paddingBottom="6dp"
     android:paddingLeft="15dp"
     android:paddingRight="15dp"
     >
@@ -25,7 +25,7 @@
             android:drawablePadding="8dp"
             android:textColorHint="#888"
             android:background="@drawable/edit"
-            style="@style/regeisteditstyle"
+            style="@style/fpsweditstyle"
             />
 
         <Button

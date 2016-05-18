@@ -83,6 +83,7 @@ public class FaceRegActivity extends BaseActivity implements View.OnClickListene
             ImageUtils.Display(facePath, mHeadView);
             mRegBtn.setText("已经被注册！");
             mRegBtn.setEnabled(false);
+            mHeadView.setEnabled(false);
         }
     }
 
@@ -102,7 +103,6 @@ public class FaceRegActivity extends BaseActivity implements View.OnClickListene
 
             @Override
             public void onSuccess() {
-                ToastUtils.show("文件上传成功！！");
                 TYUser currentUser = BmobUtils.getCurrentUser();
                 currentUser.setFacePath(NetFileUtils.getNetFilePath());
                 BmobUtils.upDateUser(currentUser, new UpdateListener() {
@@ -115,9 +115,7 @@ public class FaceRegActivity extends BaseActivity implements View.OnClickListene
                     @Override
                     public void onSuccess() {
                         //开始人脸模型的注册
-                        ToastUtils.show("文件更新成功！！");
                         if (mDatas != null) {
-                            ToastUtils.show("真正开始人脸注册！！！");
                             FaceRequest mFaceRequest = new FaceRequest(FaceRegActivity.this);
                             mFaceRequest.setParameter(SpeechConstant.AUTH_ID, (String) BmobUtils.getThingOfUser("username"));
                             mFaceRequest.setParameter(SpeechConstant.WFR_SST, "reg");
