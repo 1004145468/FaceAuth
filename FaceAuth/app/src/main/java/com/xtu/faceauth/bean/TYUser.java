@@ -10,6 +10,7 @@ public class TYUser extends BmobUser {
     private String mNickName;     //昵称
     private String mMsg;    //用户个性签名
     private String IconPath; //用户头像网络地址
+    private String facePath;  //用户人脸识别模型图片地址
 
     public String getmNickName() {
         return mNickName;
@@ -33,5 +34,13 @@ public class TYUser extends BmobUser {
 
     public void setIconPath(String iconPath) {
         IconPath = iconPath;
+    }
+
+    public String getFacePath() {
+        return facePath;
+    }
+
+    public void setFacePath(String facePath) {
+        this.facePath = facePath;
     }
 }

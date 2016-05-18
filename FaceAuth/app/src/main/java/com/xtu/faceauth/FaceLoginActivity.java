@@ -17,7 +17,6 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.iflytek.cloud.ErrorCode;
 import com.iflytek.cloud.FaceRequest;
 import com.iflytek.cloud.RequestListener;
 import com.iflytek.cloud.SpeechConstant;
@@ -145,15 +144,7 @@ public class FaceLoginActivity extends AppCompatActivity implements SurfaceHolde
             ProgressbarUtils.hideDialog();
             if (error != null) {
                 startShow(mCamera, mHolder);
-                switch (error.getErrorCode()) {
-                    case ErrorCode.MSP_ERROR_ALREADY_EXIST:
-                        ToastUtils.show("authid已经被注册，请更换后再试");
-                        break;
-
-                    default:
-                        ToastUtils.show(error.getPlainDescription(true));
-                        break;
-                }
+                ToastUtils.show(error.getPlainDescription(true));
             }
         }
     };

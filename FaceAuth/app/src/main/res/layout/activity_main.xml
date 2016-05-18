@@ -70,7 +70,8 @@
             android:background="@drawable/edit"
             android:drawableLeft="@mipmap/password"
             android:drawablePadding="8dp"
-            android:hint="@string/login_password" />
+            android:hint="@string/login_password"
+            android:inputType="textPassword"/>
 
         <CheckBox
             android:id="@+id/id_remenberInfo"

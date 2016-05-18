@@ -12,6 +12,8 @@ import cn.bmob.v3.listener.UploadFileListener;
  */
 public class NetFileUtils {
 
+    //当前文件对象
+    private static BmobFile bmobFile;
 
     /**
      *  上传文件到Bmob服务器，通过 bmobFile.getFileUrl(context));获得文件的网络存储位置
@@ -19,7 +21,18 @@ public class NetFileUtils {
      * @param mListener 状态监听
      */
     public static void uploadFile(File file,UploadFileListener mListener){
-        BmobFile bmobFile = new BmobFile(file);
+        if(!file.exists()||file.length()==0){
+            ProgressbarUtils.hideDialog();
+            ToastUtils.show("文件不存在或者已损坏！");
+            return;
+        }
+        bmobFile = new BmobFile(file);
         bmobFile.uploadblock(TYApplication.getContext(),mListener);
     }
+
+    public static String getNetFilePath(){
+        return bmobFile.getFileUrl(TYApplication.getContext());
+    }
+
+
 }
