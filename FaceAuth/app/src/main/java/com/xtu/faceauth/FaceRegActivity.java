@@ -51,7 +51,6 @@ public class FaceRegActivity extends BaseActivity implements View.OnClickListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setWinFull();
         setContentView(R.layout.activity_face_reg);
         //初始化所有视图控件
         initViews();

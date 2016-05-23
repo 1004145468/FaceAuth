@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_title" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_marginTop="15dp"
+        android:background="#aaa" />
+
+    <LinearLayout
+        android:id="@+id/id_persondetail_first"
+        style="@style/persondetailinclude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/persondetail"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/persondetail_head" />
+
+        <ImageView
+            android:id="@+id/id_persondetail_head"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/default_head"
+            android:scaleType="fitCenter"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="#aaa" />
+
+    <LinearLayout
+        android:id="@+id/id_persondetail_second"
+        style="@style/persondetailinclude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/persondetail"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/persondetail_nick" />
+
+        <TextView
+            android:id="@+id/id_persondetail_nick"
+            style="@style/persondetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="静默"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="#aaa" />
+
+    <LinearLayout
+        style="@style/persondetailinclude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/persondetail"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/persondetail_username" />
+
+        <TextView
+            android:id="@+id/id_persondetail_username"
+            style="@style/persondetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="2013551612"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="#aaa" />
+
+    <LinearLayout
+        android:id="@+id/id_persondetail_four"
+        style="@style/persondetailinclude"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/persondetail"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/persondetail_email" />
+
+        <TextView
+            android:id="@+id/id_persondetail_email"
+            style="@style/persondetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="761243593@qq.com"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="#aaa" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/persondetail_bg"
+        android:scaleType="fitXY"/>
+
+</LinearLayout>

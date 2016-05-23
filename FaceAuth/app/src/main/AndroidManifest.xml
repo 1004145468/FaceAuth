@@ -35,7 +35,15 @@
         <activity android:name=".RegeistActivity" />
         <activity android:name=".base.BaseActivity" />
         <activity android:name=".FunctionActivity" />
-        <activity android:name=".FaceRegActivity"/>
+        <activity android:name=".FaceRegActivity" />
+        <activity android:name=".SafeActivity" />
+        <activity
+            android:name=".ChpswActivity"
+            android:label="@string/title_activity_chpsw"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".PersonDetail" />
+        <activity android:name=".ChNick" />
+        <activity android:name=".ChEmail"></activity>
     </application>
 
 </manifest>

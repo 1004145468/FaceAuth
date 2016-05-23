@@ -59,6 +59,7 @@
             android:background="@drawable/edit"
             android:drawableLeft="@mipmap/user"
             android:drawablePadding="8dp"
+            android:inputType="number"
             android:hint="@string/login_user" />
 
         <EditText

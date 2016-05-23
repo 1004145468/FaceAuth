@@ -28,8 +28,26 @@
     <string name="face_reg_pic">照片</string>
     <string name="face_reg_btn">使　用</string>
 
+    <string name="safe_face">人脸识别</string>
+    <string name="safe_email">邮箱激活状态</string>
+    <string name="safe_psw">修改密码</string>
+
+    <string name="chpsw_old">旧密码：</string>
+    <string name="chpsw_old_hint">　</string>
+    <string name="chpsw_new1">新密码：</string>
+    <string name="chpsw_new2">确认密码：</string>
+    <string name="chpsw_ok">确认修改</string>
+    <string name="chpsw_showpsw">显示密码</string>
 
     <string name="owner_exit">退出登录</string>
+    <string name="title_activity_chpsw">ChpswActivity</string>
 
+    <string name="persondetail_head">头像</string>
+    <string name="persondetail_nick">昵称</string>
+    <string name="persondetail_username">用户名</string>
+    <string name="persondetail_email">邮箱</string>
+
+    <string name="chnick">请输入新的昵称</string>
+    <string name="chnick_btn">更　新</string>
 
 </resources>

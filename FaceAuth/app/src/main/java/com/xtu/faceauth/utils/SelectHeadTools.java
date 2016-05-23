@@ -40,7 +40,7 @@ public class SelectHeadTools {
      * @param context Activity上下文对象
      * @param uri  Uri
      */
-    private static void startCamearPicCut(Activity context,Uri uri) {
+    public static void startCamearPicCut(Activity context,Uri uri) {
         // 调用系统的拍照功能
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // 指定调用相机拍照后照片的储存路径
@@ -51,7 +51,7 @@ public class SelectHeadTools {
      * 调用系统的图库
      * @param context Activity上下文对象
      */
-    private static void startImageCaptrue(Activity context) {
+    public static void startImageCaptrue(Activity context) {
         Intent intent = new Intent(Intent.ACTION_PICK, null);
         intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
         context.startActivityForResult(intent, Constants.PHOTO_REQUEST_GALLERY);

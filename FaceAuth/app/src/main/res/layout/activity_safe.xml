@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="12dp"
+        android:background="#888" />
+
+    <TextView
+        style="@style/safetextviewstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onFaceAuth"
+        android:text="@string/safe_face" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#888" />
+
+    <TextView
+        style="@style/safetextviewstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onActiveEmail"
+        android:text="@string/safe_email" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#888" />
+
+    <TextView
+        style="@style/safetextviewstyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onChangePsw"
+        android:text="@string/safe_psw" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#888" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY"
+        android:src="@mipmap/safe_bg" />
+
+</LinearLayout>

@@ -91,4 +91,15 @@ public class BmobUtils {
     public static void requestEmailVerify(String mEmail,EmailVerifyListener mListener){
         BmobUser.requestEmailVerify(TYApplication.getContext(), mEmail, mListener);
     }
+
+
+    /**
+     *  用户更新密码
+     * @param oldPsw    当前密码
+     * @param newPsw    新密码
+     * @param listener  结果监听
+     */
+    public static void updatePassword(String oldPsw,String newPsw, UpdateListener listener){
+        BmobUser.updateCurrentUserPassword(TYApplication.getContext(), oldPsw,newPsw,listener);
+    }
 }

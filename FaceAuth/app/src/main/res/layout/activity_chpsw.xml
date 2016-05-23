@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/chpsw_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_title" />
+
+
+    <TextView
+        style="@style/chpswtextviewstyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/chpsw_old" />
+
+    <EditText
+        android:id="@+id/id_oldpsw"
+        style="@style/chpsw_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/id_chpsw_oldhint"
+        style="@style/chpswhinttyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/chpsw_old_hint" />
+
+    <TextView
+        style="@style/chpswtextviewstyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/chpsw_new1" />
+
+    <EditText
+        android:id="@+id/id_newpsw1"
+        style="@style/chpsw_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/id_chpsw_new1hint"
+        style="@style/chpswhinttyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/chpsw_old_hint"
+        />
+
+    <TextView
+        style="@style/chpswtextviewstyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/chpsw_new2" />
+
+    <EditText
+        android:id="@+id/id_newpsw2"
+        style="@style/chpsw_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/id_chpsw_new2hint"
+        style="@style/chpswhinttyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/chpsw_old_hint" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/regeist_btn"
+        android:onClick="onChange"
+        android:text="@string/chpsw_ok"
+        android:textColor="@color/hintext"
+        android:textSize="18sp" />
+
+</LinearLayout>
