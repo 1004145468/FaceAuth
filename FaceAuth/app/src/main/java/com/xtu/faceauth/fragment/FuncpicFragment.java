@@ -28,6 +28,8 @@ import com.xtu.faceauth.utils.ToastUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 import uk.co.senab.photoview.PhotoView;
 
 /**
@@ -63,8 +65,18 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        if(functionMap!=null){
+        if (functionMap != null) {
             photoImage.setImageBitmap(functionMap);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ShareSDK.stopSDK(getActivity());
+        if (functionMap != null) {
+            functionMap.recycle();
+            functionMap = null;
         }
     }
 
@@ -77,8 +89,7 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.id_share:
                 //分享照片
-                ToastUtils.show("开始分享");
-                //TODO
+                showShare();
                 break;
             case R.id.dialog_camera:
                 //通过相机获取图片
@@ -98,28 +109,56 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private void showShare() {
+        ShareSDK.initSDK(getActivity());
+        if (functionMap == null) {
+            ToastUtils.show("未发现需要分享的内容！");
+            return;
+        }
+
+        try {
+            File file = new File(Constants.saveDir, "upload.jpg");
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            functionMap.compress(Bitmap.CompressFormat.JPEG, 95, fileOutputStream);
+            OnekeyShare oks = new OnekeyShare();
+            //关闭sso授权
+            oks.disableSSOWhenAuthorize();
+            //设置标题
+            oks.setTitle(getString(R.string.app_name));
+            // text是分享文本，所有平台都需要这个字段
+            oks.setText("我通过图言，diy一张趣图！");
+            //本地图片的URl
+            String path = file.getAbsolutePath();
+            oks.setImagePath(path);
+            // 启动分享GUI
+            oks.show(getActivity());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     //左侧浮动的弹窗
     private PopupWindow mSkinWindow;
 
     private void showSkins() {
-        if(mSkinWindow == null){
-            View contentView = View.inflate(getActivity(),R.layout.popwindow_skins,null);
+        if (mSkinWindow == null) {
+            View contentView = View.inflate(getActivity(), R.layout.popwindow_skins, null);
             ListView listview = (ListView) contentView.findViewById(R.id.id_listview);
             SkinAdapter adapter = new SkinAdapter(getActivity());
             listview.setAdapter(adapter);
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                   //切换装饰
+                    //切换装饰
                     FaceUtils.drawImage(position);
                 }
             });
-            mSkinWindow = new PopupWindow(contentView,150,640);
+            mSkinWindow = new PopupWindow(contentView, 150, 640);
             mSkinWindow.setFocusable(true);
             mSkinWindow.setBackgroundDrawable(new BitmapDrawable());
             mSkinWindow.setAnimationStyle(R.style.SkinDialogAnimation);
         }
-        mSkinWindow.showAsDropDown(titleBar,0,120);
+        mSkinWindow.showAsDropDown(titleBar, 0, 120);
     }
 
     public void setImage(Uri uri) {
@@ -141,7 +180,7 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFail(Exception e) {
-                ToastUtils.show(e.toString());
+                ToastUtils.show("e:" + e);
             }
         });
     }
@@ -150,19 +189,19 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
 
     //弹出图片选择对话框
     private void showPhotoContainer() {
-        if (mDialog == null) {
-            View mView = View.inflate(getActivity(), R.layout.dialog_photoselect, null);
-            TextView cameraView = (TextView) mView.findViewById(R.id.dialog_camera);
-            TextView photoView = (TextView) mView.findViewById(R.id.dialog_photostore);
-            TextView skinView = (TextView) mView.findViewById(R.id.dialog_skin);
-            cameraView.setOnClickListener(this);
-            photoView.setOnClickListener(this);
-            skinView.setOnClickListener(this);
-            AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-            mDialog = mBuilder.setCancelable(true).setView(mView, 0, 0, 0, 0).create();
-            mDialog.getWindow().setWindowAnimations(R.style.FunctionDialogAnimation);
-        }
-        mDialog.show();
+            if (mDialog == null) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+                View mView = View.inflate(getActivity(), R.layout.dialog_photoselect, null);
+                TextView cameraView = (TextView) mView.findViewById(R.id.dialog_camera);
+                TextView photoView = (TextView) mView.findViewById(R.id.dialog_photostore);
+                TextView skinView = (TextView) mView.findViewById(R.id.dialog_skin);
+                cameraView.setOnClickListener(this);
+                photoView.setOnClickListener(this);
+                skinView.setOnClickListener(this);
+                mDialog = mBuilder.setCancelable(true).setView(mView, 0, 0, 0, 0).create();
+                mDialog.getWindow().setWindowAnimations(R.style.FunctionDialogAnimation);
+            }
+            mDialog.show();
     }
 
     private void showSaveDialog() {
@@ -172,11 +211,11 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         try {
-                            String path =  SystemClock.elapsedRealtime() + ".jpg";
-                            File file = new File(Constants.saveDir,path);
+                            String path = SystemClock.elapsedRealtime() + ".jpg";
+                            File file = new File(Constants.saveDir, path);
                             FileOutputStream fileOutputStream = new FileOutputStream(file);
                             functionMap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-                            ToastUtils.show("图片保存在/Sdcard/tuyan/"+path);
+                            ToastUtils.show("图片保存在/Sdcard/tuyan/" + path);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

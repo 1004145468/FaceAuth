@@ -11,7 +11,7 @@
         android:id="@+id/id_share"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:src="@mipmap/share"
+        android:src="@drawable/share_bg"
         android:layout_alignParentRight="true"
         android:layout_marginTop="20dp"
         android:layout_marginRight="20dp"
@@ -23,7 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@mipmap/function_bg"
-        android:layout_below="@+id/id_titlebar"/>
+        android:layout_below="@+id/id_titlebar"
+        android:background="#888"/>
 
     <ImageView
         android:id="@+id/id_photo"

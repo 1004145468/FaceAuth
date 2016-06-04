@@ -125,6 +125,8 @@ public class FaceUtils {
         if(faceNum<=0){
             return;
         }
+
+
         Bitmap eyeL = BitmapFactory.decodeResource(mcontext.getResources(), SkinAdapter.SKINS[index]);
         Bitmap eyeR = BitmapFactory.decodeResource(mcontext.getResources(), SkinAdapter.SKINSR[index]);
         int width = tmpBitmap.getWidth();

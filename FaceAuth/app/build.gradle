@@ -31,4 +31,5 @@ dependencies {
     compile files('libs/photoview-library-1.2.2.jar')
     compile files('libs/Msc.jar')
     compile files('libs/faceppsdk.jar')
+    compile project(':onekeyshare')
 }
