@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/aboutac_bg">
+
+    <include layout="@layout/activity_title"/>
+
+    <ImageView
+        android:id="@+id/id_appic"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp"
+        />
+
+    <TextView
+        android:id="@+id/id_appname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_name"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/id_appic"
+        android:layout_marginTop="10dp"
+        android:textSize="24sp"/>
+
+    <TextView
+        android:id="@+id/id_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2.0.0版"
+        android:textColor="#888"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/id_appname"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/id_version"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="15dp"
+        android:text="@string/about_msg"
+        android:textSize="20sp"
+        android:textColor="#666"
+        android:lineSpacingExtra="5dp"
+        />
+
+</RelativeLayout>

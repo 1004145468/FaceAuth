@@ -1,7 +1,9 @@
 package com.xtu.faceauth;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -11,7 +13,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.xtu.faceauth.config.Constants;
 import com.xtu.faceauth.factory.FragmentFactory;
+import com.xtu.faceauth.fragment.FuncpicFragment;
+
+import java.io.File;
 
 public class FunctionActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -95,6 +101,28 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
         }
         //提交事务
         transaction.commit();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //有趣图发起的请求，进行刷新
+        if(resultCode != RESULT_OK){
+            return;
+        }
+        if(requestCode == Constants.PHOTO_REQUEST_GALLERY){
+            //请求图库的返回
+            Uri photoUri = data.getData();
+            FuncpicFragment fragment = (FuncpicFragment)FragmentFactory.getFragment(0);
+            fragment.setImage(photoUri);
+        }
+
+        if(requestCode == Constants.PHOTO_REQUEST_TAKEPHOTO){
+            Uri cameraUri = Uri.fromFile(new File(Constants.cachePath));
+            FuncpicFragment fragment = (FuncpicFragment)FragmentFactory.getFragment(0);
+            fragment.setImage(cameraUri);
+        }
+
     }
 
     @Override

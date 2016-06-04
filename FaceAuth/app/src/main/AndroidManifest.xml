@@ -43,7 +43,9 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".PersonDetail" />
         <activity android:name=".ChNick" />
-        <activity android:name=".ChEmail"></activity>
+        <activity android:name=".ChEmail" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".IdeaActivity"></activity>
     </application>
 
 </manifest>

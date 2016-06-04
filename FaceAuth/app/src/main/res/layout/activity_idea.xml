@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <include layout="@layout/activity_title"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/idea_submit"
+        android:textSize="22sp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="20dp"
+        android:textColor="#999ca2"
+        android:clickable="true"
+        android:onClick="onSubmit"
+        />
+
+    <EditText
+        android:id="@+id/id_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="4"
+        android:lines="4"
+        android:layout_marginTop="115dp"
+        android:background="@drawable/edit"
+        android:hint="@string/idea_firsthint"
+        android:textColor="#666"
+        android:textSize="18sp"
+        />
+
+    <EditText
+        android:id="@+id/id_phone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/edit"
+        android:hint="@string/idea_secondhint"
+        android:textColor="#666"
+        android:textSize="18sp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:inputType="phone"
+        />
+
+</RelativeLayout>

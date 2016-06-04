@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingTop="5dp"
+    android:paddingBottom="8dp"
+    android:background="#fff"
+    >
+
+    <TextView
+        android:id="@+id/dialog_camera"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/camera"
+        android:text="@string/funcpic_camera"
+        style="@style/functionpic_dialogstyle"
+        />
+
+    <TextView
+        android:id="@+id/dialog_photostore"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/photostore"
+        android:text="@string/funcpic_photo"
+        style="@style/functionpic_dialogstyle"
+        />
+
+    <TextView
+        android:id="@+id/dialog_skin"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:drawableTop="@mipmap/skin"
+        android:text="@string/funcpic_skin"
+        style="@style/functionpic_dialogstyle"
+        />
+
+</LinearLayout>

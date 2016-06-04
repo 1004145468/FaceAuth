@@ -50,4 +50,18 @@
     <string name="chnick">请输入新的昵称</string>
     <string name="chnick_btn">更　新</string>
 
+    <string name="about_msg">\u3000\u3000“图言”作为一款基于人脸识别的趣图手机应用，
+        它是一款可以选择人脸识别进行登录的软件。如今手机app都需要有登录验证功能，
+        常规的输入用户名密码的登陆方式已经不能满足人们对登录以及安全性的要求，
+        因此本软件以人脸识别技术为中心，设计了人脸识别技术进行登录以及娱乐。
+    </string>
+
+    <string name="idea_submit">提交</string>
+    <string name="idea_firsthint">欢迎提出宝贵的意见和建议</string>
+    <string name="idea_secondhint">手机号码（选填）</string>
+
+    <string name="funcpic_photo">图库</string>
+    <string name="funcpic_camera">手机拍照</string>
+    <string name="funcpic_skin">装饰</string>
+
 </resources>

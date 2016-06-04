@@ -5,6 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 
+/**
+ *   完成全屏工作
+ *   实现返回退出
+ */
 public class BaseActivity extends AppCompatActivity {
 
     @Override

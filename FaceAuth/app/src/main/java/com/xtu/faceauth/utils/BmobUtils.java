@@ -1,6 +1,7 @@
 package com.xtu.faceauth.utils;
 
 import com.xtu.faceauth.app.TYApplication;
+import com.xtu.faceauth.bean.Advice;
 import com.xtu.faceauth.bean.TYUser;
 
 import cn.bmob.v3.BmobUser;
@@ -101,5 +102,11 @@ public class BmobUtils {
      */
     public static void updatePassword(String oldPsw,String newPsw, UpdateListener listener){
         BmobUser.updateCurrentUserPassword(TYApplication.getContext(), oldPsw,newPsw,listener);
+    }
+
+    public static void saveAdvice(String msg,String phone){
+        Advice mAdvice = new Advice(msg,phone);
+        mAdvice.save(TYApplication.getContext());
+        ToastUtils.show("您的建议图言定铭记在心！");
     }
 }

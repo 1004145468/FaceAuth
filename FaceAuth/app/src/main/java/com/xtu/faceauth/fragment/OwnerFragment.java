@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.xtu.faceauth.AboutActivity;
+import com.xtu.faceauth.IdeaActivity;
 import com.xtu.faceauth.MainActivity;
 import com.xtu.faceauth.PersonDetail;
 import com.xtu.faceauth.R;
@@ -105,10 +107,12 @@ public class OwnerFragment extends Fragment implements View.OnClickListener {
                 mActivity.startActivity(intent);
                 break;
             case R.id.id_idea:
-
+                intent.setClass(getActivity(), IdeaActivity.class);
+                mActivity.startActivity(intent);
                 break;
             case R.id.id_about:
-
+                intent.setClass(getActivity(), AboutActivity.class);
+                mActivity.startActivity(intent);
                 break;
             case R.id.id_share:
                 showShareDialog();
