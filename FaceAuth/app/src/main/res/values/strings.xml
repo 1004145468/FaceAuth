@@ -64,4 +64,9 @@
     <string name="funcpic_camera">手机拍照</string>
     <string name="funcpic_skin">装饰</string>
 
+    <string name="funcpic_dialogtitle">分享社区</string>
+    <string name="funcpic_dialogcancel">取消</string>
+    <string name="funcpic_dialogok">确定</string>
+    <string name="funcpic_dialoghint">请输入分享内容</string>
+
 </resources>

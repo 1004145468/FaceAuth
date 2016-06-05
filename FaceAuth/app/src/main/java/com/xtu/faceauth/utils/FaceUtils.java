@@ -64,13 +64,18 @@ public class FaceUtils {
     private static Context mcontext;
 
 
-    public static void detectFace(Context context, final Uri uri,CallBack callback) {
+    public static void detectFace(Context context, final Uri uri, CallBack callback) {
         mCallback = callback;
         mcontext = context;
         new Thread() {
             @Override
             public void run() {
                 try {
+
+                    if(tmpBitmap !=null){
+                        tmpBitmap.recycle();
+                        tmpBitmap = null;
+                    }
                     tmpBitmap = BitmapFactory.decodeStream(mcontext.getContentResolver().openInputStream(uri));
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
                     tmpBitmap.compress(Bitmap.CompressFormat.JPEG, 80, bos);
@@ -122,23 +127,42 @@ public class FaceUtils {
     }
 
     public static void drawImage(int index) {
-        if(faceNum<=0){
+        if (faceNum <= 0) {
             return;
         }
 
-
-        Bitmap eyeL = BitmapFactory.decodeResource(mcontext.getResources(), SkinAdapter.SKINS[index]);
-        Bitmap eyeR = BitmapFactory.decodeResource(mcontext.getResources(), SkinAdapter.SKINSR[index]);
+        //获取原始图片的 宽 和 高
         int width = tmpBitmap.getWidth();
         int height = tmpBitmap.getHeight();
+
+        //创建原始图片的副本，可写
         final Bitmap mBitmap = Bitmap.createBitmap(width, height, tmpBitmap.getConfig());
         Canvas canvas = new Canvas(mBitmap);
         canvas.drawBitmap(tmpBitmap, 0, 0, null);
-       // canvas.drawbitmap
+
+        //获取两眼间的距离 也就是单眼图片的宽度
+        int disX = (int) ((rightX - leftX) / 100 * width);
+
+        //加载原始眼睛素材
+        Bitmap initeyeL = BitmapFactory.decodeResource(mcontext.getResources(), SkinAdapter.SKINS[index]);
+        Bitmap initeyeR = BitmapFactory.decodeResource(mcontext.getResources(), SkinAdapter.SKINSR[index]);
+
+        //根据素材获取原图片
+        Bitmap eyeL = Bitmap.createScaledBitmap(initeyeL, disX, disX, false);
+        Bitmap eyeR = Bitmap.createScaledBitmap(initeyeR, disX, disX, false);
+
+        //回收素材
+        initeyeL.recycle();
+        initeyeR.recycle();
+
+        // canvas.drawbitmap
         canvas.drawBitmap(eyeL, width * leftX / 100 - eyeL.getWidth() / 2, height * leftY / 100 - eyeL.getHeight() / 2, null);
         canvas.drawBitmap(eyeR, width * rightX / 100 - eyeR.getWidth() / 2, height * rightY / 100 - eyeR.getHeight() / 2, null);
+
+        //回收眼睛图片
         eyeL.recycle();
         eyeR.recycle();
+
         //更新原图
         ((Activity) mcontext).runOnUiThread(new Runnable() {
             @Override

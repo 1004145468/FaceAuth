@@ -1,7 +1,9 @@
 package com.xtu.faceauth.fragment;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,6 +20,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.xtu.faceauth.R;
+import com.xtu.faceauth.ShareActivity;
 import com.xtu.faceauth.adapter.SkinAdapter;
 import com.xtu.faceauth.config.Constants;
 import com.xtu.faceauth.utils.FaceUtils;
@@ -40,6 +43,8 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
     private PhotoView photoImage;
     private ImageView selectPhoto;
     private View titleBar;
+    private File file;   //缓存文件
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -68,16 +73,21 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
         if (functionMap != null) {
             photoImage.setImageBitmap(functionMap);
         }
+        ShareSDK.initSDK(getActivity());
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ShareSDK.stopSDK(getActivity());
         if (functionMap != null) {
-            functionMap.recycle();
-            functionMap = null;
+            photoImage.setImageBitmap(functionMap);
         }
+        //清除图片缓存
+        if(file!=null&&file.exists()){
+            file.delete();
+        }
+        ShareSDK.stopSDK(getActivity());
+
     }
 
     @Override
@@ -110,17 +120,26 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
     }
 
     private void showShare() {
-        ShareSDK.initSDK(getActivity());
         if (functionMap == null) {
             ToastUtils.show("未发现需要分享的内容！");
             return;
         }
 
         try {
-            File file = new File(Constants.saveDir, "upload.jpg");
+            file = new File(Constants.saveDir, "upload.jpg");
             FileOutputStream fileOutputStream = new FileOutputStream(file);
             functionMap.compress(Bitmap.CompressFormat.JPEG, 95, fileOutputStream);
             OnekeyShare oks = new OnekeyShare();
+
+            //为弹窗添加自定义的图标
+            Bitmap customIcon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+            oks.setCustomerLogo(customIcon, "社区", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //分享至社区
+                   share2Community();
+                }
+            });
             //关闭sso授权
             oks.disableSSOWhenAuthorize();
             //设置标题
@@ -136,6 +155,14 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
             e.printStackTrace();
         }
     }
+
+    //分享至社区
+    private void share2Community(){
+        //打开内容填写对话框
+        Intent intent = new Intent(getActivity(), ShareActivity.class);
+        startActivity(intent);
+    }
+
 
     //左侧浮动的弹窗
     private PopupWindow mSkinWindow;
@@ -167,7 +194,7 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
         dealPicture(uri);
     }
 
-    private Bitmap functionMap = null;
+    public static Bitmap functionMap = null;
 
     private void dealPicture(final Uri uri) {
         ProgressbarUtils.showDialog(getActivity(), "图言努力p图呢！主人");
@@ -180,7 +207,7 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFail(Exception e) {
-                ToastUtils.show("e:" + e);
+                ToastUtils.show("图片格式有问题，小言很抱歉！");
             }
         });
     }

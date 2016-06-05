@@ -138,4 +138,9 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
                 .setNegativeButton("算了",null)
                 .show();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
