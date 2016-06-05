@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal"
+    android:background="#d4d2d2"
+    android:padding="4dp"
+    >
+
+    <RelativeLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        >
+        <ImageView 
+            android:id="@+id/iv_rotate"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/indicator_arrow"/>
+        
+        <ProgressBar 
+            android:id="@+id/pb_rotate"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:visibility="invisible"
+            android:layout_centerInParent="true"
+            android:indeterminateDuration="1000"
+            android:indeterminateDrawable="@drawable/indeterminate_drawable"
+           />
+        
+    </RelativeLayout>
+    
+    <LinearLayout 
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="15dp"
+        >
+        <TextView 
+            android:id="@+id/tv_refresh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/head_first"
+            android:textSize="18sp"
+            android:textColor="#bb000000"
+            android:textStyle="bold"/>
+        <TextView 
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/head_second"
+            android:textColor="#aaa"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+</LinearLayout>

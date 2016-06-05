@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 
+import com.xtu.faceauth.bean.TYUser;
 import com.xtu.faceauth.bean.Works;
 import com.xtu.faceauth.config.Constants;
 import com.xtu.faceauth.utils.BmobUtils;
@@ -37,7 +38,6 @@ public class ShareActivity extends AppCompatActivity {
     //确定分享
     public void okShare(View view){
         ProgressbarUtils.showDialog(this,"看，有灰机！");
-        final String mContent = contentView.getText().toString();
         File file = new File(Constants.saveDir, "upload.jpg");
         NetFileUtils.uploadFile(file, new UploadFileListener() {
             @Override
@@ -48,8 +48,10 @@ public class ShareActivity extends AppCompatActivity {
 
             @Override
             public void onSuccess() {
+                TYUser currentUser = BmobUtils.getCurrentUser();
+                String mContent = contentView.getText().toString();
                 String netFilePath = NetFileUtils.getNetFilePath();
-                Works works = new Works((String) BmobUtils.getThingOfUser("username"),mContent,netFilePath);
+                Works works = new Works(currentUser,mContent,netFilePath);
                 works.save(ShareActivity.this, new SaveListener() {
                     @Override
                     public void onFailure(int i, String s) {

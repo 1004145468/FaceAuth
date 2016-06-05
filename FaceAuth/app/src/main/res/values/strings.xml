@@ -69,4 +69,8 @@
     <string name="funcpic_dialogok">确定</string>
     <string name="funcpic_dialoghint">请输入分享内容</string>
 
+
+    <string name="head_first">下拉刷新</string>
+    <string name="head_second">上次刷新：</string>
+
 </resources>
