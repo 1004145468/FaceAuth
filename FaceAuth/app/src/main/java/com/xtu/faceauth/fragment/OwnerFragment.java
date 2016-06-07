@@ -18,6 +18,7 @@ import com.xtu.faceauth.MainActivity;
 import com.xtu.faceauth.PersonDetail;
 import com.xtu.faceauth.R;
 import com.xtu.faceauth.SafeActivity;
+import com.xtu.faceauth.WorksActivity;
 import com.xtu.faceauth.bean.TYUser;
 import com.xtu.faceauth.utils.BmobUtils;
 import com.xtu.faceauth.utils.ImageUtils;
@@ -100,7 +101,8 @@ public class OwnerFragment extends Fragment implements View.OnClickListener {
                 mActivity.startActivity(intent);
                 break;
             case R.id.id_mworks:
-
+                intent.setClass(getActivity(), WorksActivity.class);
+                mActivity.startActivity(intent);
                 break;
             case R.id.id_safe:
                 intent.setClass(getActivity(), SafeActivity.class);

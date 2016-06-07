@@ -13,6 +13,8 @@ public class Works extends BmobObject{
 
     private String worksPath; //分享作品的网络存储地址
 
+    public Works(){}
+
     public Works(TYUser mAuthor, String content, String worksPath) {
         this.mAuthor = mAuthor;
         Content = content;

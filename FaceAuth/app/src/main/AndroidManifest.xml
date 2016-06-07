@@ -74,7 +74,8 @@
         <activity
             android:name=".ShareActivity"
             android:theme="@style/translucent_theme" />
-        <activity android:name=".UserDetailActivity"></activity>
+        <activity android:name=".UserDetailActivity" />
+        <activity android:name=".WorksActivity"></activity>
     </application>
 
 </manifest>

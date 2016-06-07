@@ -24,6 +24,8 @@ public class WorksAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
     private List<Works> mDatas;
 
+    private int[] mStat = null;
+
     //当前的月份
     private int mCurrentMonth;
     //当前的日期
@@ -35,11 +37,11 @@ public class WorksAdapter extends BaseAdapter {
     //是否展示过昨天
     private boolean showYesterday;
 
-
     public WorksAdapter(Context mContext, List<Works> mDatas) {
         this.mContext = mContext;
         this.mDatas = mDatas;
         mInflater = LayoutInflater.from(mContext);
+        mStat = new int[mDatas.size()];
         Calendar mCalendar = Calendar.getInstance();
         mCurrentMonth = mCalendar.get(Calendar.MONTH) + 1;
         mCurrentDay = mCalendar.get(Calendar.DAY_OF_MONTH);
@@ -81,13 +83,12 @@ public class WorksAdapter extends BaseAdapter {
         holder.monthTextView.setVisibility(View.INVISIBLE);
         holder.dayTextView.setVisibility(View.INVISIBLE);
 
-        int state = Integer.parseInt(holder.showTextView.getTag().toString());
+        int state = mStat[position];
         //对每一个条目进行数据初始化
         Works currentWorks = mDatas.get(position);
         try {
             //2016-06-06 15:30:55
             String createdAt = currentWorks.getCreatedAt();
-
             Integer month = Integer.valueOf(createdAt.substring(5, 7));
             Integer day = Integer.valueOf(createdAt.substring(8, 10));
 
@@ -106,7 +107,7 @@ public class WorksAdapter extends BaseAdapter {
                     //绑定为昨天
                     state = 3;
                 }
-                holder.showTextView.setTag(state);
+                mStat[position] = state;
             }
 
             if (state == 1) {

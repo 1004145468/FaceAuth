@@ -9,7 +9,8 @@
         android:id="@+id/id_sharedialog"
         android:layout_width="260dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+       android:layout_centerHorizontal="true"
+        android:layout_marginTop="150dp"
         android:background="@drawable/funcpic_dialogbackground"
         android:orientation="vertical">
 
@@ -19,7 +20,7 @@
             android:gravity="center_horizontal"
             android:padding="5dp"
             android:text="@string/funcpic_dialogtitle"
-            android:textColor="#6092e1"
+            android:textColor="#afff"
             android:textSize="22sp" />
 
         <View
@@ -34,8 +35,14 @@
             android:layout_margin="6dp"
             android:textSize="18sp"
             android:hint="@string/funcpic_dialoghint"
+            android:background="@drawable/edit"
             android:maxLines="3"
             />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#ccc"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -47,15 +54,25 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/funcpic_dialogcancel"
+                android:textColor="#a000"
+                android:background="@android:color/transparent"
                 android:onClick="canelShare"
                 />
+
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:background="#ccc"/>
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/funcpic_dialogok"
+                android:padding="12dp"
+                android:background="@android:color/transparent"
                 android:onClick="okShare"
+                android:textColor="#a000"
                 />
         </LinearLayout>
 

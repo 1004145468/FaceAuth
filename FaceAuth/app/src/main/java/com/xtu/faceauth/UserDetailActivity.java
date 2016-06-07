@@ -18,7 +18,7 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
 
-public class UserDetailActivity extends BaseActivity {
+public class UserDetailActivity extends BaseActivity{
 
     private ImageView headImageView;  //用户的头像
     private TextView nickTextView;   //用户的昵称
@@ -26,7 +26,7 @@ public class UserDetailActivity extends BaseActivity {
     private TextView msgTextView;    //显示用户的签名
     private ListView workListView;   //显示用户的作品
     private TYUser mAuthor;
-    private WorksAdapter mAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +75,7 @@ public class UserDetailActivity extends BaseActivity {
 
     //绑定数据
     private void bindDatas(List<Works> mDatas) {
-        mAdapter = new WorksAdapter(this, mDatas);
+        WorksAdapter mAdapter = new WorksAdapter(this, mDatas);
         workListView.setAdapter(mAdapter);
     }
-
 }

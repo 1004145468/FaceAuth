@@ -14,7 +14,7 @@ public class ProgressbarUtils {
     public static void showDialog(Context context,String msg){
         mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setMessage(msg);
-        mProgressDialog.setCancelable(true);
+        mProgressDialog.setCancelable(false);
         mProgressDialog.show();
         isShowing = true;
     }
