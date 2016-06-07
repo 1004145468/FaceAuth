@@ -5,7 +5,7 @@ import cn.bmob.v3.BmobObject;
 /**
  * Created by Administrator on 2016/6/4.
  */
-public class Works extends BmobObject {
+public class Works extends BmobObject{
 
     private TYUser mAuthor;  //作者
 
@@ -42,4 +42,5 @@ public class Works extends BmobObject {
     public void setWorksPath(String worksPath) {
         this.worksPath = worksPath;
     }
+
 }

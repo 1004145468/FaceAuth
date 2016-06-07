@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:background="@mipmap/userdetail_bg"
+        android:padding="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@mipmap/ic_menu_back"
+            android:onClick="onBack"
+            />
+
+        <ImageView
+            android:id="@+id/id_head"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="45dp"
+            android:src="@mipmap/default_head"/>
+
+        <TextView
+            android:id="@+id/id_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="涯上月灬指香"
+            android:maxWidth="260dp"
+            android:singleLine="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="120dp"
+            android:textColor="#ddd"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/id_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="145dp"
+            android:text="2013551627"
+            android:layout_centerHorizontal="true"
+            android:maxWidth="260dp"
+            android:singleLine="true"
+            android:textColor="#ddd"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/id_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="170dp"
+            android:text="我是小言助手，我来维护数据安全"
+            android:layout_centerHorizontal="true"
+            android:maxWidth="260dp"
+            android:singleLine="true"
+            android:textColor="#ddd"
+            android:textSize="14sp"
+            />
+        
+    </RelativeLayout>
+    
+    <ListView
+        android:id="@+id/id_listview"
+        android:paddingTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+</LinearLayout>

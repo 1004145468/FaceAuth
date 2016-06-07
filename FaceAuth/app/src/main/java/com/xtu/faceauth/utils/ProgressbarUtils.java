@@ -8,17 +8,21 @@ import android.content.Context;
  */
 public class ProgressbarUtils {
 
+    private static boolean isShowing;
     private static ProgressDialog mProgressDialog;
 
     public static void showDialog(Context context,String msg){
         mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setMessage(msg);
-        mProgressDialog.setCancelable(false);
+        mProgressDialog.setCancelable(true);
         mProgressDialog.show();
+        isShowing = true;
     }
 
     public static void hideDialog(){
-        mProgressDialog.dismiss();
+        if(isShowing){
+            mProgressDialog.dismiss();
+            isShowing = false;
+        }
     }
-
 }

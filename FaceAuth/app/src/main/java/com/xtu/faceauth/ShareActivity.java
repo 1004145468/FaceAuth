@@ -21,12 +21,14 @@ import cn.bmob.v3.listener.UploadFileListener;
 public class ShareActivity extends AppCompatActivity {
 
     private EditText contentView;
+    private View dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dialog_communication);
         contentView = (EditText) findViewById(R.id.id_share2content);
+        dialog = findViewById(R.id.id_sharedialog);
     }
 
 
@@ -37,12 +39,14 @@ public class ShareActivity extends AppCompatActivity {
 
     //确定分享
     public void okShare(View view){
+        dialog.setVisibility(View.INVISIBLE);
         ProgressbarUtils.showDialog(this,"看，有灰机！");
         File file = new File(Constants.saveDir, "upload.jpg");
         NetFileUtils.uploadFile(file, new UploadFileListener() {
             @Override
             public void onFailure(int i, String s) {
                 ProgressbarUtils.hideDialog();
+                dialog.setVisibility(View.VISIBLE);
                 ToastUtils.show("网络错误，图片上传失败！");
             }
 
@@ -57,6 +61,7 @@ public class ShareActivity extends AppCompatActivity {
                     public void onFailure(int i, String s) {
                         ProgressbarUtils.hideDialog();
                         ToastUtils.show("网络不给力，信息发布失败！");
+                        dialog.setVisibility(View.VISIBLE);
                     }
 
                     @Override

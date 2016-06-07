@@ -71,7 +71,10 @@
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".ShareActivity" android:theme="@style/translucent_theme"></activity>
+        <activity
+            android:name=".ShareActivity"
+            android:theme="@style/translucent_theme" />
+        <activity android:name=".UserDetailActivity"></activity>
     </application>
 
 </manifest>

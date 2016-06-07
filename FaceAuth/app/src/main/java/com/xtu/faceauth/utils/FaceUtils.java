@@ -78,7 +78,7 @@ public class FaceUtils {
                     }
                     tmpBitmap = BitmapFactory.decodeStream(mcontext.getContentResolver().openInputStream(uri));
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    tmpBitmap.compress(Bitmap.CompressFormat.JPEG, 80, bos);
+                    tmpBitmap.compress(Bitmap.CompressFormat.JPEG, 70, bos);
                     byte[] mImageDatas = bos.toByteArray();
                     HttpRequests requests = new HttpRequests(Constants.KEY, Constants.SCRETE, true, true);
                     PostParameters parameters = new PostParameters();

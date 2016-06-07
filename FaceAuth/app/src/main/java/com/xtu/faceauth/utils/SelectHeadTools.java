@@ -52,8 +52,8 @@ public class SelectHeadTools {
      * @param context Activity上下文对象
      */
     public static void startImageCaptrue(Activity context) {
-        Intent intent = new Intent(Intent.ACTION_PICK, null);
-        intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
         context.startActivityForResult(intent, Constants.PHOTO_REQUEST_GALLERY);
     }
 

@@ -1,11 +1,13 @@
 package com.xtu.faceauth.bean;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobUser;
 
 /**
  * Created by Administrator on 2016/5/14.
  */
-public class TYUser extends BmobUser {
+public class TYUser extends BmobUser  implements Serializable{
 
     private String mNickName;     //昵称
     private String mMsg;    //用户个性签名
@@ -43,4 +45,5 @@ public class TYUser extends BmobUser {
     public void setFacePath(String facePath) {
         this.facePath = facePath;
     }
+
 }

@@ -1,6 +1,7 @@
 package com.xtu.faceauth.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.xtu.faceauth.R;
+import com.xtu.faceauth.UserDetailActivity;
+import com.xtu.faceauth.bean.TYUser;
 import com.xtu.faceauth.bean.Works;
 import com.xtu.faceauth.utils.ImageUtils;
 
@@ -22,8 +25,10 @@ public class CommunicationAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
     private List<Works> mDatas;
+    private Context mContext;
 
     public CommunicationAdapter(Context mContext, List<Works> mDatas) {
+        this.mContext = mContext;
         mInflater = LayoutInflater.from(mContext);
         this.mDatas = mDatas;
 
@@ -49,27 +54,29 @@ public class CommunicationAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder = null;
-        if(convertView == null){
+        if (convertView == null) {
             holder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.item_communication,parent,false);
+            convertView = mInflater.inflate(R.layout.item_communication, parent, false);
             holder.headImageView = (ImageView) convertView.findViewById(R.id.id_head);
             holder.userNameView = (TextView) convertView.findViewById(R.id.id_username);
             holder.contentView = (TextView) convertView.findViewById(R.id.id_content);
             holder.shareImageview = (ImageView) convertView.findViewById(R.id.id_pic);
             convertView.setTag(holder);
-        }else{
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Works mWork = mDatas.get(position);
+        final Works mWork = mDatas.get(position);
         //显示分享图片
         //设置用户头像信息
         String iconPath = mWork.getmAuthor().getIconPath();
-        ImageUtils.Display(iconPath,holder.headImageView);
+        ImageUtils.Display(iconPath, holder.headImageView);
         holder.headImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //触发用户详情表页面的跳转
+                startUserDetail(mWork.getmAuthor());
+
             }
         });
 
@@ -87,7 +94,13 @@ public class CommunicationAdapter extends BaseAdapter {
         return convertView;
     }
 
-    class ViewHolder{
+    public void startUserDetail(TYUser author){
+        Intent intent = new Intent(mContext, UserDetailActivity.class);
+        intent.putExtra("author",author);
+        mContext.startActivity(intent);
+    }
+
+    class ViewHolder {
         ImageView headImageView;
         TextView userNameView;
         TextView contentView;
@@ -95,4 +108,6 @@ public class CommunicationAdapter extends BaseAdapter {
 
     }
 
+
 }
+

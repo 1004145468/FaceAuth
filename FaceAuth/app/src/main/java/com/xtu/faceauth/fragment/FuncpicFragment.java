@@ -126,9 +126,9 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
         }
 
         try {
-            file = new File(Constants.saveDir, "upload.jpg");
+            File file = new File(Constants.loadup);
             FileOutputStream fileOutputStream = new FileOutputStream(file);
-            functionMap.compress(Bitmap.CompressFormat.JPEG, 95, fileOutputStream);
+            functionMap.compress(Bitmap.CompressFormat.JPEG, 80, fileOutputStream);
             OnekeyShare oks = new OnekeyShare();
 
             //为弹窗添加自定义的图标
@@ -140,6 +140,7 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
                    share2Community();
                 }
             });
+
             //关闭sso授权
             oks.disableSSOWhenAuthorize();
             //设置标题
@@ -147,10 +148,10 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
             // text是分享文本，所有平台都需要这个字段
             oks.setText("我通过图言，diy一张趣图！");
             //本地图片的URl
-            String path = file.getAbsolutePath();
-            oks.setImagePath(path);
+            oks.setImagePath(Constants.loadup);
             // 启动分享GUI
             oks.show(getActivity());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -207,7 +208,8 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void onFail(Exception e) {
-                ToastUtils.show("图片格式有问题，小言很抱歉！");
+                ToastUtils.show(e.toString());
+                ToastUtils.show("图片格式不正确，请更换图片");
             }
         });
     }

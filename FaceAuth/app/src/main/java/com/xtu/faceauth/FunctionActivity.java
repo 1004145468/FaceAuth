@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.xtu.faceauth.config.Constants;
 import com.xtu.faceauth.factory.FragmentFactory;
 import com.xtu.faceauth.fragment.FuncpicFragment;
+import com.xtu.faceauth.utils.SelectHeadTools;
 
 import java.io.File;
 
@@ -32,6 +34,7 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
     //四个icon显示组件
     private TextView[] functionBtns = new TextView[4];
     private FragmentManager mFragmentManager;
+    private Uri saveUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,21 +110,28 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //有趣图发起的请求，进行刷新
-        if(resultCode != RESULT_OK){
+        if (resultCode != RESULT_OK) {
             return;
         }
-        if(requestCode == Constants.PHOTO_REQUEST_GALLERY){
+        if (requestCode == Constants.PHOTO_REQUEST_GALLERY) {
             //请求图库的返回
             Uri photoUri = data.getData();
-            FuncpicFragment fragment = (FuncpicFragment)FragmentFactory.getFragment(0);
+            FuncpicFragment fragment = (FuncpicFragment) FragmentFactory.getFragment(0);
             fragment.setImage(photoUri);
         }
 
-        if(requestCode == Constants.PHOTO_REQUEST_TAKEPHOTO){
+        if (requestCode == Constants.PHOTO_REQUEST_TAKEPHOTO) {
             Uri cameraUri = Uri.fromFile(new File(Constants.cachePath));
-            FuncpicFragment fragment = (FuncpicFragment)FragmentFactory.getFragment(0);
-            fragment.setImage(cameraUri);
+            saveUri = Uri.fromFile(new File(Constants.saveDir, SystemClock.elapsedRealtime()+".jpg"));
+            SelectHeadTools.startPhotoZoom(this, cameraUri, saveUri, 600);
         }
+
+        if(requestCode == Constants.PHOTO_REQUEST_CUT){
+            new File(Constants.cachePath).delete();
+            FuncpicFragment fragment = (FuncpicFragment) FragmentFactory.getFragment(0);
+            fragment.setImage(saveUri);
+        }
+
 
     }
 
@@ -135,7 +145,7 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
                         FunctionActivity.this.finish();
                     }
                 })
-                .setNegativeButton("算了",null)
+                .setNegativeButton("算了", null)
                 .show();
     }
 
