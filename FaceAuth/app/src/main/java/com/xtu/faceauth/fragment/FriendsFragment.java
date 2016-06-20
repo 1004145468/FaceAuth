@@ -84,8 +84,6 @@ public class FriendsFragment extends Fragment implements RefreshView.OnRefreshLi
 
     }
 
-
-    private long startLoading;
     @Override
     public void OnPullRefreshing() {
         isPullRefresh = true;

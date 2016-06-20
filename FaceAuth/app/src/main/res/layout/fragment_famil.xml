@@ -137,7 +137,7 @@
             android:layout_weight="1"
             android:clickable="true"
             android:scaleType="centerCrop"
-            android:tag="4" />
+            android:tag="5" />
 
     </LinearLayout>
 </LinearLayout>

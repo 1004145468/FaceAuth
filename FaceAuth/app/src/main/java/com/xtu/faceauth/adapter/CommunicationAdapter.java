@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.xtu.faceauth.PhotoActivity;
 import com.xtu.faceauth.R;
 import com.xtu.faceauth.UserDetailActivity;
 import com.xtu.faceauth.bean.TYUser;
@@ -89,6 +90,14 @@ public class CommunicationAdapter extends BaseAdapter {
 
         //设置分享的图片
         ImageUtils.Display(mWork.getWorksPath(), holder.shareImageview);
+        holder.shareImageview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, PhotoActivity.class);
+                intent.putExtra("url",mWork.getWorksPath());
+                mContext.startActivity(intent);
+            }
+        });
 
         //设置分享内容
         return convertView;

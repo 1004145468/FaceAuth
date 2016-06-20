@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -43,8 +44,6 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
     private PhotoView photoImage;
     private ImageView selectPhoto;
     private View titleBar;
-    private File file;   //缓存文件
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,12 +79,10 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
     public void onDestroy() {
         super.onDestroy();
         if (functionMap != null) {
-            photoImage.setImageBitmap(functionMap);
+            functionMap.recycle();
+            functionMap = null;
         }
-        //清除图片缓存
-        if(file!=null&&file.exists()){
-            file.delete();
-        }
+
         ShareSDK.stopSDK(getActivity());
 
     }
@@ -137,7 +134,7 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
                 @Override
                 public void onClick(View v) {
                     //分享至社区
-                   share2Community();
+                    share2Community();
                 }
             });
 
@@ -158,7 +155,7 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
     }
 
     //分享至社区
-    private void share2Community(){
+    private void share2Community() {
         //打开内容填写对话框
         Intent intent = new Intent(getActivity(), ShareActivity.class);
         startActivity(intent);
@@ -218,19 +215,17 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
 
     //弹出图片选择对话框
     private void showPhotoContainer() {
-            if (mDialog == null) {
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
-                View mView = View.inflate(getActivity(), R.layout.dialog_photoselect, null);
-                TextView cameraView = (TextView) mView.findViewById(R.id.dialog_camera);
-                TextView photoView = (TextView) mView.findViewById(R.id.dialog_photostore);
-                TextView skinView = (TextView) mView.findViewById(R.id.dialog_skin);
-                cameraView.setOnClickListener(this);
-                photoView.setOnClickListener(this);
-                skinView.setOnClickListener(this);
-                mDialog = mBuilder.setCancelable(true).setView(mView, 0, 0, 0, 0).create();
-                mDialog.getWindow().setWindowAnimations(R.style.FunctionDialogAnimation);
-            }
-            mDialog.show();
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(getActivity());
+        View mView = View.inflate(getActivity(), R.layout.dialog_photoselect, null);
+        TextView cameraView = (TextView) mView.findViewById(R.id.dialog_camera);
+        TextView photoView = (TextView) mView.findViewById(R.id.dialog_photostore);
+        TextView skinView = (TextView) mView.findViewById(R.id.dialog_skin);
+        cameraView.setOnClickListener(this);
+        photoView.setOnClickListener(this);
+        skinView.setOnClickListener(this);
+        mDialog = mBuilder.setCancelable(true).setView(mView, 0, 0, 0, 0).create();
+        mDialog.getWindow().setWindowAnimations(R.style.FunctionDialogAnimation);
+        mDialog.show();
     }
 
     private void showSaveDialog() {
@@ -241,10 +236,10 @@ public class FuncpicFragment extends Fragment implements View.OnClickListener {
                     public void onClick(DialogInterface dialog, int which) {
                         try {
                             String path = SystemClock.elapsedRealtime() + ".jpg";
-                            File file = new File(Constants.saveDir, path);
+                            File file = new File(Environment.getExternalStorageDirectory(), path);
                             FileOutputStream fileOutputStream = new FileOutputStream(file);
                             functionMap.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-                            ToastUtils.show("图片保存在/Sdcard/tuyan/" + path);
+                            ToastUtils.show("图片保存在/Sdcard/" + path);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }

@@ -1,6 +1,9 @@
 package com.xtu.faceauth;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -74,8 +77,18 @@ public class UserDetailActivity extends BaseActivity{
     }
 
     //绑定数据
-    private void bindDatas(List<Works> mDatas) {
+    private void bindDatas(final List<Works> mDatas) {
         WorksAdapter mAdapter = new WorksAdapter(this, mDatas);
         workListView.setAdapter(mAdapter);
+        workListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String worksPath = mDatas.get(position).getWorksPath();
+                Intent intent = new Intent(UserDetailActivity.this, PhotoActivity.class);
+                intent.putExtra("url",worksPath);
+                startActivity(intent);
+            }
+        });
     }
+
 }

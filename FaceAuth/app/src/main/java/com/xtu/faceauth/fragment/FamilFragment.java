@@ -144,6 +144,9 @@ public class FamilFragment extends Fragment implements View.OnClickListener {
                 Uri currentUri = data.getData();
                 mePicView.setImageURI(currentUri);
                 //开始裁剪图片
+                File saveDir = new File(Constants.saveDir);
+                if(!(saveDir.exists() && saveDir.isDirectory()))
+                    saveDir.mkdir();
                 saveUri = Uri.fromFile(new File(Constants.cropPath));
                 Intent intent = new Intent("com.android.camera.action.CROP");
                 intent.setData(currentUri);

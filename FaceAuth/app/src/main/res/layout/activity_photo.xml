@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/id_root"
     android:background="#000"
     >
 
@@ -10,6 +11,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:src="@mipmap/function_bg"
         android:onClick="true"/>
+
+    <TextView
+        android:id="@+id/id_progress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+       android:textSize="16sp"
+        android:visibility="invisible"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="#fff"
+        android:background="#000"/>
 
 </RelativeLayout>
