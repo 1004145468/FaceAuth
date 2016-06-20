@@ -24,12 +24,6 @@
         android:layout_height="0.5dp"
         android:background="#888" />
 
-    <TextView
-        style="@style/safetextviewstyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onActiveEmail"
-        android:text="@string/safe_email" />
 
     <View
         android:layout_width="match_parent"

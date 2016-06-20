@@ -47,7 +47,7 @@ public class RegeistActivity extends BaseActivity {
             return;
         }
         ProgressbarUtils.showDialog(this,"用户信息注册中...");
-        BmobUtils.startRegister(mUserName, mPassword, mEmail, mNickName, "我为图言代言！O(∩_∩)O~", new SaveListener() {
+        BmobUtils.startRegister(mUserName, mPassword, mEmail, mNickName, "我为图言代言！O(∩_∩)O~",new SaveListener() {
             @Override
             public void onSuccess() {
                 ProgressbarUtils.hideDialog();

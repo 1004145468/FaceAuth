@@ -73,4 +73,9 @@
     <string name="head_first">下拉刷新</string>
     <string name="head_second">上次刷新：</string>
 
+
+    <string name="famil_me">我的照片</string>
+    <string name="famil_num">相似度:</string>
+
+
 </resources>

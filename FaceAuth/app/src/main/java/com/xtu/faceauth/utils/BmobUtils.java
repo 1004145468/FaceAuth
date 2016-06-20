@@ -3,6 +3,7 @@ package com.xtu.faceauth.utils;
 import com.xtu.faceauth.app.TYApplication;
 import com.xtu.faceauth.bean.Advice;
 import com.xtu.faceauth.bean.TYUser;
+import com.xtu.faceauth.config.Constants;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.EmailVerifyListener;
@@ -26,13 +27,14 @@ public class BmobUtils {
      * @param mListener  结果监听
      */
     public static void startRegister(String UserName, String Password, String Email,
-                                        String NickName, String Msg, SaveListener mListener) {
+                                        String NickName, String Msg,SaveListener mListener) {
         TYUser mUser = new TYUser();
         mUser.setUsername(UserName);
         mUser.setPassword(Password);
         mUser.setEmail(Email);
         mUser.setmNickName(NickName);
         mUser.setmMsg(Msg);
+        mUser.setIconPath(Constants.default_Url);
         mUser.signUp(TYApplication.getContext(),mListener);
     }
 

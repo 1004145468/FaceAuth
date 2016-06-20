@@ -32,6 +32,7 @@
         android:drawablePadding="8dp"
         android:background="@drawable/edit"
         style="@style/regeisteditstyle"
+        android:inputType="textPassword"
         />
 
     <EditText

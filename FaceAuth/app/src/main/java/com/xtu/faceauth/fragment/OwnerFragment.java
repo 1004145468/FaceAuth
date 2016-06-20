@@ -40,30 +40,22 @@ public class OwnerFragment extends Fragment implements View.OnClickListener {
     private View mShareLayout;
     private View mExitLayout;
 
-    //获取当前用户信息
-    private TYUser iUser;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View mParent = inflater.inflate(R.layout.fragment_owner, container, false);
-        initData();
         initViews(mParent);
         return mParent;
     }
 
     //获取用户信息
     private void initData() {
-        iUser = BmobUtils.getCurrentUser();
+
     }
 
     private void initViews(View mParent) {
         mHeadIV = (ImageView) mParent.findViewById(R.id.id_head);
         mNick = (TextView) mParent.findViewById(R.id.id_nick);
         mUser = (TextView) mParent.findViewById(R.id.id_user);
-
-        //初始化头部条目的显示
-        if (!TextUtils.isEmpty(iUser.getIconPath()))
-            ImageUtils.Display(iUser.getIconPath(), mHeadIV);
 
         mInfoLayout = mParent.findViewById(R.id.id_info);
         mWorksLayout = mParent.findViewById(R.id.id_mworks);
@@ -87,6 +79,10 @@ public class OwnerFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
+        TYUser iUser = BmobUtils.getCurrentUser();
+        //初始化头部条目的显示
+        if (!TextUtils.isEmpty(iUser.getIconPath()))
+            ImageUtils.Display(iUser.getIconPath(), mHeadIV);
         mNick.setText(iUser.getmNickName());
         mUser.setText(iUser.getUsername());
     }

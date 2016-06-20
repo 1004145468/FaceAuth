@@ -27,11 +27,6 @@ public class SafeActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    // 邮箱激活
-    public void onActiveEmail(View view){
-
-    }
-
     //更改密码
     public void onChangePsw(View view){
         Intent intent = new Intent(this,ChpswActivity.class);

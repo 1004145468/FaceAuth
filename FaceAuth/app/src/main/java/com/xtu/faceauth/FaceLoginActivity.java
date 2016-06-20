@@ -23,6 +23,7 @@ import com.iflytek.cloud.RequestListener;
 import com.iflytek.cloud.SpeechConstant;
 import com.iflytek.cloud.SpeechError;
 import com.xtu.faceauth.config.Constants;
+import com.xtu.faceauth.utils.BmobUtils;
 import com.xtu.faceauth.utils.FaceUtils;
 import com.xtu.faceauth.utils.ImageUtils;
 import com.xtu.faceauth.utils.ProgressbarUtils;
@@ -158,7 +159,14 @@ public class FaceLoginActivity extends AppCompatActivity implements SurfaceHolde
             return;
         }
         if ("success".equals(obj.get("rst")) && obj.getBoolean("verf")) {
-            enterFunctionActivty();
+           String username =  mUserNameText.getText().toString();
+            Object currentusername = BmobUtils.getThingOfUser("username");
+            if(currentusername!=null&&currentusername.equals(username)){
+                enterFunctionActivty();
+            }else{
+                ToastUtils.show("当前账户与绑定账户不符，请先普通登录！");
+            }
+
         } else {
             ToastUtils.show("验证失败");
             startShow(mCamera, mHolder);
@@ -207,7 +215,6 @@ public class FaceLoginActivity extends AppCompatActivity implements SurfaceHolde
         mFaBtn.setOnClickListener(this);
     }
 
-    //进行拍照，拍出来data传递的是一个缩略图，不要
     @Override
     public void onClick(View v) {
         Log.d("hehe","hehehe");

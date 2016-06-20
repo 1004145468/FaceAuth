@@ -20,6 +20,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/5/16.
@@ -64,6 +66,7 @@ public class FaceUtils {
     private static Context mcontext;
 
 
+    //上传人脸
     public static void detectFace(Context context, final Uri uri, CallBack callback) {
         mCallback = callback;
         mcontext = context;
@@ -72,13 +75,13 @@ public class FaceUtils {
             public void run() {
                 try {
 
-                    if(tmpBitmap !=null){
+                    if (tmpBitmap != null) {
                         tmpBitmap.recycle();
                         tmpBitmap = null;
                     }
                     tmpBitmap = BitmapFactory.decodeStream(mcontext.getContentResolver().openInputStream(uri));
                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                    tmpBitmap.compress(Bitmap.CompressFormat.JPEG, 70, bos);
+                    tmpBitmap.compress(Bitmap.CompressFormat.JPEG, 65, bos);
                     byte[] mImageDatas = bos.toByteArray();
                     HttpRequests requests = new HttpRequests(Constants.KEY, Constants.SCRETE, true, true);
                     PostParameters parameters = new PostParameters();
@@ -126,6 +129,7 @@ public class FaceUtils {
         }.start();
     }
 
+    //绘制趣图图片
     public static void drawImage(int index) {
         if (faceNum <= 0) {
             return;
@@ -173,5 +177,82 @@ public class FaceUtils {
                 }
             }
         });
+    }
+
+    public interface SearchListener {
+        void onFail(Exception e);
+
+        void onSuccess(List<String> aList, double mValue);
+    }
+
+    private static double familNum;  //最大相似度
+
+    //相似脸
+    public static void searchImage(final Context mContext, final SearchListener mListener) {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    File mFile = new File(Constants.cropPath);
+                    HttpRequests requests = new HttpRequests(Constants.KEY, Constants.SCRETE, true, true);
+
+                    //获取图片的face_id
+                    PostParameters parameters = new PostParameters();
+                    parameters.setImg(mFile);
+                    JSONObject jsonObject = requests.detectionDetect(parameters);
+                    JSONArray face = jsonObject.getJSONArray("face");
+                    String face_id = face.getJSONObject(0).getString("face_id");
+
+                    //查看相似脸face_id
+                    PostParameters searchParams = new PostParameters();
+                    searchParams.setKeyFaceId(face_id);
+                    searchParams.setFacesetName("9e38e7283c2d4e3ca2e3bd3f9aa739c8");
+                    searchParams.setCount(6);
+                    JSONObject searchResult = requests.recognitionSearch(searchParams);
+                    JSONArray candidate = searchResult.getJSONArray("candidate");
+                    int size = candidate.length();
+                    if (size <= 0) {
+                        throw new Exception();
+                    }
+
+                    //查询所有图片的地址
+
+                    final List<String> aUrl = new ArrayList<>();
+                    for (int i = 0; i < size; i++) {
+                        String fFaceId = candidate.getJSONObject(i).getString("face_id");
+                        if (i == 0) {
+                            familNum = candidate.getJSONObject(i).getDouble("similarity");
+                        }
+                        PostParameters findParamters = new PostParameters();
+                        findParamters.setFaceId(fFaceId);
+                        JSONObject faceInfo = requests.infoGetFace(findParamters);
+                        JSONArray face_info = faceInfo.getJSONArray("face_info");
+                        JSONObject jsonObject1 = face_info.getJSONObject(0);
+                        String mUrl = jsonObject1.getString("url");
+                        aUrl.add(mUrl);
+                    }
+
+                    //用户主线程回调
+                    ((Activity) mContext).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mListener != null) {
+                                mListener.onSuccess(aUrl, familNum);
+                            }
+                        }
+                    });
+                } catch (final Exception e) {
+                    e.printStackTrace();
+                    ((Activity) mContext).runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (mListener != null) {
+                                mListener.onFail(e);
+                            }
+                        }
+                    });
+                }
+            }
+        }.start();
     }
 }

@@ -113,23 +113,24 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
         if (resultCode != RESULT_OK) {
             return;
         }
+
         if (requestCode == Constants.PHOTO_REQUEST_GALLERY) {
             //请求图库的返回
             Uri photoUri = data.getData();
             FuncpicFragment fragment = (FuncpicFragment) FragmentFactory.getFragment(0);
             fragment.setImage(photoUri);
         }
-
-        if (requestCode == Constants.PHOTO_REQUEST_TAKEPHOTO) {
+        else if (requestCode == Constants.PHOTO_REQUEST_TAKEPHOTO) {
             Uri cameraUri = Uri.fromFile(new File(Constants.cachePath));
             saveUri = Uri.fromFile(new File(Constants.saveDir, SystemClock.elapsedRealtime()+".jpg"));
-            SelectHeadTools.startPhotoZoom(this, cameraUri, saveUri, 600);
+            SelectHeadTools.startPhotoZoom(this, cameraUri, saveUri, 500);
         }
-
-        if(requestCode == Constants.PHOTO_REQUEST_CUT){
+        else if(requestCode == Constants.PHOTO_REQUEST_CUT){
             new File(Constants.cachePath).delete();
             FuncpicFragment fragment = (FuncpicFragment) FragmentFactory.getFragment(0);
             fragment.setImage(saveUri);
+        }else{
+            super.onActivityResult(requestCode,resultCode,data);
         }
 
 
@@ -142,6 +143,13 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
                 .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        File file = new File(Constants.saveDir);
+                        if(file.exists()&&file.isDirectory()){
+                            File[] files = file.listFiles();
+                            for(File mfile : files){
+                                mfile.delete();
+                            }
+                        }
                         FunctionActivity.this.finish();
                     }
                 })

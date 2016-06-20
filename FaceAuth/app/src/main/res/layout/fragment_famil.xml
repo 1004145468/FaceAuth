@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/fragment_titlebar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/fami_bg"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/id_isme"
+            style="@style/famil_textstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="@string/famil_me" />
+
+        <ImageView
+            android:id="@+id/id_mepic"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/id_isme"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:src="@mipmap/x"
+            android:scaleType="centerCrop"
+            android:clickable="true" />
+
+        <TextView
+            style="@style/famil_textstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="70dp"
+            android:text="@string/famil_num" />
+
+        <TextView
+            android:id="@+id/id_familnum"
+            style="@style/famil_textstyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text=""
+            android:textColor="#a00" />
+
+        <ImageView
+            android:id="@+id/id_starpic"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/id_isme"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/function_bg" />
+
+        <ImageView
+            android:id="@+id/id_trans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            android:src="@mipmap/ic_launcher" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/id_image1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:tag="0" />
+
+        <ImageView
+            android:id="@+id/id_image2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:tag="1" />
+
+        <ImageView
+            android:id="@+id/id_image3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:tag="2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/id_image4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:tag="3" />
+
+        <ImageView
+            android:id="@+id/id_image5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:tag="4" />
+
+        <ImageView
+            android:id="@+id/id_image6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:scaleType="centerCrop"
+            android:tag="4" />
+
+    </LinearLayout>
+</LinearLayout>
