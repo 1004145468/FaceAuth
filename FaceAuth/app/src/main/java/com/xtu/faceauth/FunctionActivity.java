@@ -41,6 +41,10 @@ public class FunctionActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_function);
+        File saveDir = new File(Constants.saveDir);
+        //打开功能界面时 先判断是否有根目录
+        if(!(saveDir.exists() && saveDir.isDirectory()))
+            saveDir.mkdir();
         initViews();
     }
 
