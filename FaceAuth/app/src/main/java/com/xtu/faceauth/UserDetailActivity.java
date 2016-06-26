@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.xtu.faceauth.adapter.WorksAdapter;
 import com.xtu.faceauth.base.BaseActivity;
 import com.xtu.faceauth.bean.TYUser;
@@ -29,6 +30,8 @@ public class UserDetailActivity extends BaseActivity{
     private TextView msgTextView;    //显示用户的签名
     private ListView workListView;   //显示用户的作品
     private TYUser mAuthor;
+    private BmobQuery<Works> mQuery;
+    private List<Works> mDatas;
 
 
     @Override
@@ -36,7 +39,7 @@ public class UserDetailActivity extends BaseActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_detail);
         mAuthor = (TYUser) getIntent().getSerializableExtra("author");
-        initDatas();
+        mDatas = (List<Works>) getIntent().getSerializableExtra("work");
         initView();
     }
 
@@ -51,33 +54,11 @@ public class UserDetailActivity extends BaseActivity{
         nickTextView.setText(mAuthor.getmNickName());
         usernameTextView.setText(mAuthor.getUsername());
         msgTextView.setText(mAuthor.getmMsg());
-
-    }
-
-    private void initDatas() {
-        ProgressbarUtils.showDialog(this, "小言正在努力探索中...");
-        //加载对应用户的信息
-        BmobQuery<Works> mQuery = new BmobQuery<>();
-        mQuery.addWhereEqualTo("mAuthor", mAuthor);
-        mQuery.order("-createdAt");
-        mQuery.findObjects(this, new FindListener<Works>() {
-            @Override
-            public void onError(int i, String s) {
-                ProgressbarUtils.hideDialog();
-                ToastUtils.show("加载用户该用户信息失败！");
-            }
-
-            @Override
-            public void onSuccess(List<Works> list) {
-                ProgressbarUtils.hideDialog();
-                bindDatas(list);
-            }
-
-        });
+        bindDatas();
     }
 
     //绑定数据
-    private void bindDatas(final List<Works> mDatas) {
+    private void bindDatas() {
         WorksAdapter mAdapter = new WorksAdapter(this, mDatas);
         workListView.setAdapter(mAdapter);
         workListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -91,4 +72,10 @@ public class UserDetailActivity extends BaseActivity{
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mDatas.clear();
+        mDatas = null;
+    }
 }

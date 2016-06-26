@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.xtu.faceauth.bean.TYUser;
 import com.xtu.faceauth.utils.BmobUtils;
 import com.xtu.faceauth.utils.ProgressbarUtils;
 import com.xtu.faceauth.utils.SpUtils;
@@ -27,7 +28,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     private EditText mUserText,mPsdText;
 
-    private boolean mFaceLogin;
     private boolean mAutoLogin;
 
     private static int REQUEST_FACELOGIN = 1;
@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mAutoLogin = SpUtils.getAutoLogin();
-        mFaceLogin = SpUtils.getFaceLogin();
 
        // Log.e("hehe","hehehe");
         //当前用户不为空，并且允许自动登录
@@ -169,7 +168,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 break;
             case MotionEvent.ACTION_UP:
                 int tmpX = (int) event.getX();
-                if(startX-tmpX>100&&mFaceLogin){
+                TYUser User = BmobUtils.getCurrentUser();
+                if(startX-tmpX>100&&User!=null&&User.getFLOpen()){
                     //达到侧滑阈值
                     Intent intent= new Intent(this,FaceLoginActivity.class);
                     startActivityForResult(intent,REQUEST_FACELOGIN);

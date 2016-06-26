@@ -47,7 +47,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".PersonDetail" />
         <activity android:name=".ChNick" />
-        <activity android:name=".ChEmail" />
+        <activity android:name=".ChMsg" />
         <activity android:name=".AboutActivity" />
         <activity android:name=".IdeaActivity" />
         <activity
@@ -74,7 +74,7 @@
         <activity
             android:name=".ShareActivity"
             android:theme="@style/translucent_theme" />
-        <activity android:name=".UserDetailActivity" />
+        <activity android:name=".UserDetailActivity"/>
         <activity android:name=".WorksActivity" />
         <activity android:name=".PhotoActivity"></activity>
     </application>

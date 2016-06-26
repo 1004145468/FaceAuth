@@ -27,16 +27,4 @@ public class SpUtils {
         return mSP.getBoolean(AUTOLOGIN,false);
     }
 
-    //保存配置是否进行人脸识别
-    public static void setFaceLogin(Boolean value){
-        SharedPreferences.Editor edit = mSP.edit();
-        edit.putBoolean(FACELOGIN,value);
-        edit.commit();
-    }
-
-    //获取当前是否为允许人脸识别
-    public static boolean getFaceLogin(){
-        return mSP.getBoolean(FACELOGIN,false);
-    }
-
 }

@@ -1,11 +1,13 @@
 package com.xtu.faceauth.bean;
 
+import java.io.Serializable;
+
 import cn.bmob.v3.BmobObject;
 
 /**
  * Created by Administrator on 2016/6/4.
  */
-public class Works extends BmobObject{
+public class Works extends BmobObject implements Serializable{
 
     private TYUser mAuthor;  //作者
 

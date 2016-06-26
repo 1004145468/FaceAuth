@@ -8,11 +8,11 @@ import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.xtu.faceauth.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/5/16.
@@ -27,27 +27,29 @@ public class ImageUtils {
             .showImageForEmptyUri(R.mipmap.load_image_fail)
             .showImageOnFail(R.mipmap.load_fail_icon)
             .showImageOnLoading(R.mipmap.loading_image)
-            .cacheInMemory(true).cacheOnDisc(true)
-            .displayer(new FadeInBitmapDisplayer(10)).build();
+            .cacheInMemory(true)
+            .cacheOnDisk(true)
+            .bitmapConfig(Bitmap.Config.RGB_565)
+            .build();
 
 
     /**
      * 加载网络图片并显示在界面上
-     * @param imageUrl   网络图片的地址
-     * @param imageView  需要展示图片的视图
+     *
+     * @param imageUrl  网络图片的地址
+     * @param imageView 需要展示图片的视图
      */
-   public static void Display(String imageUrl,ImageView imageView){
-       imageloader.displayImage(imageUrl,imageView, options);
-   }
+    public static void Display(String imageUrl, ImageView imageView) {
+        imageloader.displayImage(imageUrl, imageView, options);
+    }
 
     /*
         通过图片路径获取图片的字节数组
-        
      */
-    public static byte[] getData(String mFilePath){
+    public static byte[] getData(String mFilePath) {
         Bitmap mBitmap = BitmapFactory.decodeFile(mFilePath);
         ByteArrayOutputStream bas = new ByteArrayOutputStream();
-        mBitmap.compress(Bitmap.CompressFormat.JPEG,85,bas);
+        mBitmap.compress(Bitmap.CompressFormat.JPEG, 85, bas);
         mBitmap.recycle();
         return bas.toByteArray();
     }
@@ -85,7 +87,7 @@ public class ImageUtils {
     /**
      * 旋转图片
      *
-     * @param angle	旋转角度
+     * @param angle  旋转角度
      * @param bitmap 原图
      * @return bitmap 旋转后的图片
      */

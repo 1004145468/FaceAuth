@@ -61,7 +61,7 @@ public class FaceRegActivity extends BaseActivity implements View.OnClickListene
         titleView.setText("人脸识别");
 
         //获取当前的开关状态
-        isOpen = SpUtils.getFaceLogin();
+        isOpen = (boolean) BmobUtils.getThingOfUser("FLOpen");
 
         View mToggleView = findViewById(R.id.id_toggle);
         mToggleImage = (ImageView) findViewById(R.id.id_view);
@@ -150,8 +150,7 @@ public class FaceRegActivity extends BaseActivity implements View.OnClickListene
             case R.id.id_toggle:
                 //切换开关状态
                 isOpen = !isOpen;
-                SpUtils.setFaceLogin(isOpen);
-                turnShow(isOpen);
+                updateState();
                 break;
             case R.id.id_head:
                 //选择图片
@@ -172,6 +171,26 @@ public class FaceRegActivity extends BaseActivity implements View.OnClickListene
             default:
                 break;
         }
+    }
+
+    private void updateState() {
+        TYUser currentUser = BmobUtils.getCurrentUser();
+        currentUser.setFLOpen(isOpen);
+        ProgressbarUtils.showDialog(this,"更新人脸登录状态");
+        BmobUtils.upDateUser(currentUser, new UpdateListener() {
+            @Override
+            public void onSuccess() {
+                ProgressbarUtils.hideDialog();
+                turnShow(isOpen);
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                ProgressbarUtils.hideDialog();
+                isOpen = !isOpen;
+            }
+        });
+
     }
 
     private Uri photoUri;

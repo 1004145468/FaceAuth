@@ -44,10 +44,12 @@
 
     <string name="persondetail_head">头像</string>
     <string name="persondetail_nick">昵称</string>
+    <string name="persondetail_msg">个性签名</string>
     <string name="persondetail_username">用户名</string>
     <string name="persondetail_email">邮箱</string>
 
     <string name="chnick">请输入新的昵称</string>
+    <string name="chmsg">请输入新的签名</string>
     <string name="chnick_btn">更　新</string>
 
     <string name="about_msg">\u3000\u3000“图言”作为一款基于人脸识别的趣图手机应用，

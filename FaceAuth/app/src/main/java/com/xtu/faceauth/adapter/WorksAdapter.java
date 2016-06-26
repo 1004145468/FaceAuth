@@ -130,7 +130,7 @@ public class WorksAdapter extends BaseAdapter {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        ImageUtils.Display(currentWorks.getWorksPath(), holder.imageView);
+       ImageUtils.Display(currentWorks.getWorksPath(), holder.imageView);
         holder.contentTextView.setText(currentWorks.getContent());
         return convertView;
     }

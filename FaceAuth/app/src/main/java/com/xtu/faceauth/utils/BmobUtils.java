@@ -23,17 +23,17 @@ public class BmobUtils {
      * @param Password 密码
      * @param Email    注册邮箱
      * @param NickName 昵称
-     * @param Msg      个性说明
      * @param mListener  结果监听
      */
     public static void startRegister(String UserName, String Password, String Email,
-                                        String NickName, String Msg,SaveListener mListener) {
+                                        String NickName,SaveListener mListener) {
         TYUser mUser = new TYUser();
         mUser.setUsername(UserName);
         mUser.setPassword(Password);
         mUser.setEmail(Email);
         mUser.setmNickName(NickName);
-        mUser.setmMsg(Msg);
+        mUser.setmMsg("我为图言代言！O(∩_∩)O~");
+        mUser.setFLOpen(false);
         mUser.setIconPath(Constants.default_Url);
         mUser.signUp(TYApplication.getContext(),mListener);
     }

@@ -18,6 +18,8 @@ import com.xtu.faceauth.utils.ProgressbarUtils;
 import com.xtu.faceauth.utils.SelectHeadTools;
 import com.xtu.faceauth.utils.ToastUtils;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 
 import cn.bmob.v3.listener.UpdateListener;
@@ -27,7 +29,8 @@ public class PersonDetail extends BaseActivity implements View.OnClickListener {
 
     private TextView mNickText;         // 昵称字段
     private TextView mUserNameText;     // 用户名
-    private TextView mEmailText;        //邮箱
+    private TextView mEmailText;       //邮箱
+    private TextView mMsgText;        //个人签名
 
     private ImageView mHeadImage;       // 头像
 
@@ -47,17 +50,20 @@ public class PersonDetail extends BaseActivity implements View.OnClickListener {
         mNickText = (TextView) findViewById(R.id.id_persondetail_nick);
         mUserNameText = (TextView) findViewById(R.id.id_persondetail_username);
         mEmailText = (TextView) findViewById(R.id.id_persondetail_email);
+        mMsgText = (TextView) findViewById(R.id.id_persondetail_msg);
+
+
         String iconPath = (String) BmobUtils.getThingOfUser("IconPath");
         if(!TextUtils.isEmpty(iconPath)){
             ImageUtils.Display(iconPath, mHeadImage);
         }
         View firstView = findViewById(R.id.id_persondetail_first);
         View secondView = findViewById(R.id.id_persondetail_second);
-        View fourView = findViewById(R.id.id_persondetail_four);
+        View fiveView = findViewById(R.id.id_persondetail_five);
 
         firstView.setOnClickListener(this);
         secondView.setOnClickListener(this);
-        fourView.setOnClickListener(this);
+        fiveView.setOnClickListener(this);
     }
 
     @Override
@@ -66,6 +72,7 @@ public class PersonDetail extends BaseActivity implements View.OnClickListener {
         mNickText.setText((String) BmobUtils.getThingOfUser("mNickName"));
         mUserNameText.setText((String) BmobUtils.getThingOfUser("username"));
         mEmailText.setText((String) BmobUtils.getThingOfUser("email"));
+        mMsgText.setText((String) BmobUtils.getThingOfUser("mMsg"));
     }
 
     @Override
@@ -80,9 +87,10 @@ public class PersonDetail extends BaseActivity implements View.OnClickListener {
                 Intent intent = new Intent(this,ChNick.class);
                 startActivity(intent);
                 break;
-            case R.id.id_persondetail_four:
-                //更改绑定的邮箱
-
+            case R.id.id_persondetail_five:
+                //更改用户签名
+                Intent intent2 = new Intent(this,ChMsg.class);
+                startActivity(intent2);
                 break;
             default:
                 break;

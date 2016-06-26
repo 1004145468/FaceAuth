@@ -1,6 +1,12 @@
 package com.xtu.faceauth;
 
+import android.util.Log;
+
+import com.xtu.faceauth.utils.BmobUtils;
+
 import org.junit.Test;
+
+import cn.bmob.v3.listener.SaveListener;
 
 import static org.junit.Assert.*;
 
@@ -10,6 +16,16 @@ import static org.junit.Assert.*;
 public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
-        assertEquals(4, 2 + 2);
+        BmobUtils.startLogin("1000", "1004145468", new SaveListener() {
+            @Override
+            public void onSuccess() {
+                Log.d("", "onSuccess: ");
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });
     }
 }

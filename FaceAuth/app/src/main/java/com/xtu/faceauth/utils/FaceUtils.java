@@ -5,7 +5,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
 import android.net.Uri;
+import android.util.Log;
 
 import com.facepp.http.HttpRequests;
 import com.facepp.http.PostParameters;
@@ -61,6 +64,7 @@ public class FaceUtils {
     private static float rightX;
     private static float leftY;
     private static float leftX;
+    private static float angle;
     private static Bitmap tmpBitmap;
     private static CallBack mCallback;
     private static Context mcontext;
@@ -71,6 +75,7 @@ public class FaceUtils {
         mCallback = callback;
         mcontext = context;
         new Thread() {
+
             @Override
             public void run() {
                 try {
@@ -87,6 +92,7 @@ public class FaceUtils {
                     PostParameters parameters = new PostParameters();
                     parameters.setImg(mImageDatas);
                     JSONObject jsonObject = requests.detectionDetect(parameters);
+                    Log.e("----->",jsonObject.toString());
 
                     JSONArray face = jsonObject.getJSONArray("face");
                     faceNum = face.length();
@@ -110,6 +116,9 @@ public class FaceUtils {
                     leftY = (float) eye_left.getDouble("y");
                     rightX = (float) eye_right.getDouble("x");
                     rightY = (float) eye_right.getDouble("y");
+
+                    //旋转角度
+                    angle = (float) Math.atan((leftY - rightY) / (rightX - leftX));
 
                     drawImage(0);
 
@@ -159,7 +168,7 @@ public class FaceUtils {
         initeyeL.recycle();
         initeyeR.recycle();
 
-        // canvas.drawbitmap
+
         canvas.drawBitmap(eyeL, width * leftX / 100 - eyeL.getWidth() / 2, height * leftY / 100 - eyeL.getHeight() / 2, null);
         canvas.drawBitmap(eyeR, width * rightX / 100 - eyeR.getWidth() / 2, height * rightY / 100 - eyeR.getHeight() / 2, null);
 

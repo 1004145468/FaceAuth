@@ -14,9 +14,17 @@ import com.xtu.faceauth.R;
 import com.xtu.faceauth.UserDetailActivity;
 import com.xtu.faceauth.bean.TYUser;
 import com.xtu.faceauth.bean.Works;
+import com.xtu.faceauth.utils.BmobUtils;
 import com.xtu.faceauth.utils.ImageUtils;
+import com.xtu.faceauth.utils.ProgressbarUtils;
+import com.xtu.faceauth.utils.ToastUtils;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
 
 /**
  * Created by Administrator on 2016/6/5.
@@ -76,8 +84,14 @@ public class CommunicationAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 //触发用户详情表页面的跳转
-                startUserDetail(mWork.getmAuthor());
-
+                TYUser tyUser = mWork.getmAuthor();
+                List<Works> list = new ArrayList<>();
+                for (Works works :mDatas) {
+                    if(works.getmAuthor().equals(tyUser)){
+                        list.add(works);
+                    }
+                }
+               startUserDetail(tyUser,list);
             }
         });
 
@@ -103,9 +117,10 @@ public class CommunicationAdapter extends BaseAdapter {
         return convertView;
     }
 
-    public void startUserDetail(TYUser author){
+    public void startUserDetail(TYUser author,List<Works> list){
         Intent intent = new Intent(mContext, UserDetailActivity.class);
         intent.putExtra("author",author);
+        intent.putExtra("work",(Serializable)list);
         mContext.startActivity(intent);
     }
 
